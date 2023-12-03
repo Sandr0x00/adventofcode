@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 import os
 
@@ -8,7 +10,7 @@ readme = """\
 
 """
 
-for item in os.listdir():
+for item in sorted(os.listdir()):
     if not os.path.isdir(item):
         continue
 
@@ -16,7 +18,7 @@ for item in os.listdir():
         continue
 
     with open(f"{item}/README.md") as f:
-        desc = re.search(r"--- (Day[^<]+)", f.read()).group(1)
+        desc = re.search(r"--- (Day [^<]+)", f.read()).group(1)
         assert desc[-4:] == " ---"
         desc = desc[:-4]
         readme += f"- [{desc}]({item})\n"
