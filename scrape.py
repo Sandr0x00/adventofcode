@@ -3,6 +3,7 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
+from readme_builder import build
 
 URL = "https://adventofcode.com/2023/day"
 
@@ -23,3 +24,5 @@ for article in soup.find_all("article"):
 
 with open(f"{day:02d}/README.md", "w") as f:
     f.write(readme)
+
+build()
