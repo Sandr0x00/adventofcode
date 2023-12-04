@@ -28,8 +28,9 @@ for board, name in boards.items():
     soup = BeautifulSoup(r.text, "html.parser")
     for row in soup.find_all(class_="privboard-row")[1:]:
         row = row.decode_contents()
-        pos = re.search(r'\)</span>(?P<pos>[^<]+)<span', row).group(1)
-        row = re.sub(r'\)</span>(?P<pos>[^<]+)<span', f'.{pos:>4}<span', row)
+        if '<span class="privboard-position">' in row:
+            pos = re.search(r'\)</span>(?P<pos>[^<]+)<span', row).group(1)
+            row = re.sub(r'\)</span>(?P<pos>[^<]+)<span', f'.{pos:>4}<span', row)
         row = row.replace('</span>', '')
         row = re.sub(r'<span class="privboard-(name|position)">', '', row)
         row = row.replace('<span class="privboard-star-both">*', '\x1b[0;33m*\x1b[0m')
