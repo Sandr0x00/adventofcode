@@ -4,17 +4,13 @@ fn main() {
     let contents = fs::read_to_string("input").unwrap();
 
     let mut sum: u32 = 0;
-    let mut winnings = Vec::<u32>::new();
-
-    // set originals to 1
-    for _ in contents.lines() {
-        winnings.push(1);
-    }
+    // every card has 1 original
+    let mut winnings = vec![1; contents.lines().count()];
 
     for (i, line) in contents.lines().enumerate() {
-        let w_n: Vec<&str> = line[10..].split(" | ").collect();
-        let winners: Vec<i32> = w_n[0].split(" ").filter_map(|w| w.parse::<i32>().ok()).collect();
-        let numbers: Vec<i32> = w_n[1].split(" ").filter_map(|w| w.parse::<i32>().ok()).collect();
+        let w_n: Vec<&str> = line[10..].split('|').collect();
+        let winners: Vec<i32> = w_n[0].split(' ').filter_map(|w| w.parse::<i32>().ok()).collect();
+        let numbers: Vec<i32> = w_n[1].split(' ').filter_map(|w| w.parse::<i32>().ok()).collect();
 
         let mut idx: isize = -1;
         for winner in winners {
