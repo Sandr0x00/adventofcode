@@ -31,7 +31,7 @@ def build():
             desc = desc[:-4]
             readme += "- "
             if language:
-                readme += f'<img src="{language}" height="16" /> '
+                readme += f'<img src="{language}" width="16" /> '
             readme += f'[{desc}]({item})\n'
 
     with open("README.md", "w") as f:
