@@ -39,5 +39,8 @@ for board, name in boards.items():
         row = row.replace('<span class="privboard-star-locked">*', ' ')
         row = re.sub(r'<a href="[^"]+" target="_blank">([^<]+)</a>', r"\1", row)
         row = row.replace(me, f'\x1b[0;33m{me}\x1b[0m')
+        x_button = '<input class="privboard-delbtn"'
+        if x_button in row:
+            row = row[:row.index('<input class="privboard-delbtn"')]
         print(row)
 
