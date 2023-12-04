@@ -18,11 +18,21 @@ def build():
         if not os.path.exists(f"{item}/README.md"):
             continue
 
+        language = None
+        if os.path.exists(f"{item}/solve.py"):
+            language = "lang-python.svg"
+        elif os.path.exists(f"{item}/Cargo.toml"):
+            language = "lang-rust.svg"
+
+
         with open(f"{item}/README.md") as f:
             desc = re.search(r"--- (Day [^<]+)", f.read()).group(1)
             assert desc[-4:] == " ---"
             desc = desc[:-4]
-            readme += f"- [{desc}]({item})\n"
+            readme += "- "
+            if language:
+                readme += f'<img src="{language}" height="16" /> '
+            readme += f'[{desc}]({item})\n'
 
     with open("README.md", "w") as f:
         f.write(readme)
