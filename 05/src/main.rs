@@ -1,8 +1,6 @@
 use std::fs;
 
-#[derive(Debug)]
-#[derive(PartialEq)]
-#[derive(Clone)]
+#[derive(Debug, PartialEq, Clone)]
 enum Mode {
     Seeds,
     SeedToSoil,
@@ -27,7 +25,7 @@ struct Seed {
     count: u64,
 }
 
-fn rek(seeds: &mut Vec<Seed>, s: usize, mapping: &Vec<Mapping>) {
+fn rek(seeds: &mut Vec<Seed>, s: usize, mapping: &[Mapping]) {
     let seed = &seeds[s];
     let seed_end = seed.start + seed.count;
 
@@ -68,7 +66,7 @@ fn main() {
     let seeds: Vec<_> = lines[0][7..].split(' ').filter_map(|w| w.parse::<u64>().ok()).collect();
 
     // Part One: each value is one seed
-    let mut seeds_one = Vec::<Seed>::new();
+    let mut seeds_one = Vec::new();
     for s in &seeds {
         let seed = Seed {
             start: *s,
@@ -77,7 +75,7 @@ fn main() {
         seeds_one.push(seed);
     }
     // Part Two: start - range combination
-    let mut seeds_two = Vec::<Seed>::new();
+    let mut seeds_two = Vec::new();
     for s in (0..seeds.len()).step_by(2) {
         let seed = Seed {
             start: seeds[s],
@@ -86,9 +84,9 @@ fn main() {
         seeds_two.push(seed);
     }
 
-    let mut mappings = Vec::<Vec::<Mapping>>::new();
+    let mut mappings = Vec::<Vec<_>>::new();
     for _ in 0..7 {
-        mappings.push(Vec::<Mapping>::new());
+        mappings.push(Vec::new());
     }
 
     let mut mode = Mode::Seeds;
@@ -130,7 +128,7 @@ fn main() {
             Mode::LightToTemperature => mappings[4].push(mapping),
             Mode::TemperatureToHumidity => mappings[5].push(mapping),
             Mode::HumidityToLocation => mappings[6].push(mapping),
-            _ => panic!("Should not happen")
+            _ => unreachable!(),
         }
     }
 
