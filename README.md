@@ -7,3 +7,4 @@
 - <img src="lang-python.svg" width="16" /> [Day 3: Gear Ratios](03)
 - <img src="lang-rust.svg" width="16" /> [Day 4: Scratchcards](04)
 - <img src="lang-rust.svg" width="16" /> [Day 5: If You Give A Seed A Fertilizer](05)
+- <img src="lang-rust.svg" width="16" /> [Day 6: Wait For It](06)
