@@ -24,6 +24,17 @@ fn card_value(card: char, jokers: bool) -> u32 {
     }
 }
 
+enum Hand {
+    Five = 7,
+    Four = 6,
+    Three = 3,
+    Pair = 1,
+    HighCard = 0,
+
+    FullHouse = 4, // Three + Pair
+    TwoPair = 2, // Pair + Pair
+}
+
 #[derive(Debug, Eq)]
 struct Camel {
     hand: Vec<char>,
@@ -56,62 +67,68 @@ impl Camel {
                 continue;
             }
             hand_value += match count {
-                // five of a kind
-                5 => 7,
-                // four of a kind
-                4 => 6,
-                // three of a kind
-                3 => 3,
-                // pair
-                2 => 1, // => 2 pairs == 2
-                // single card
-                _ => 0,
-            };
+                5 => Hand::Five,
+                4 => Hand::Four,
+                3 => Hand::Three, // Three + Pair == FullHouse
+                2 => Hand::Pair, // => Pair + Pair == TwoPair
+                _ => Hand::HighCard,
+            } as usize;
         }
 
+        let mut hand = match hand_value {
+            7 => Hand::Five,
+            6 => Hand::Four,
+            5 => unreachable!(),
+            4 => Hand::FullHouse,
+            3 => Hand::Three,
+            2 => Hand::TwoPair,
+            1 => Hand::Pair,
+            _ => Hand::HighCard,
+        };
+
         if self.jokers {
-            hand_value = match hand_value {
+            hand = match hand {
                 // five of a kind
-                7 => 7, // no space for jokers
+                Hand::Five => Hand::Five, // no space for jokers
                 // four of a kind
-                6 => 6 + *jokers, // potential five of a kind
-                // does not exist
-                5 => unreachable!(),
+                Hand::Four => match jokers {
+                    1 => Hand::Five, // five of a kind
+                    _ => Hand::Four,
+                },
                 // full house
-                4 => 4, // no space for jokers
+                Hand::FullHouse => Hand::FullHouse, // no space for jokers
                 // three of a kind
-                3 => match jokers {
-                    2 => 7, // five of a kind
-                    1 => 6, // four of a kind
-                    _ => 3,
+                Hand::Three => match jokers {
+                    2 => Hand::Five, // five of a kind
+                    1 => Hand::Four, // four of a kind
+                    _ => Hand::Three,
                 },
                 // two pairs
-                2 => match jokers {
-                    1 => 4, // full house
-                    _ => 2,
+                Hand::TwoPair => match jokers {
+                    1 => Hand::FullHouse, // full house
+                    _ => Hand::TwoPair,
                 },
                 // one pair
-                1 => match jokers {
-                    3 => 7, // five of a kind
-                    2 => 6, // four of a kind
-                    1 => 3, // three of a kind
-                    _ => 1,
+                Hand::Pair => match jokers {
+                    3 => Hand::Five, // five of a kind
+                    2 => Hand::Four, // four of a kind
+                    1 => Hand::Three, // three of a kind
+                    _ => Hand::Pair,
                 },
                 // single card
                 _ => match jokers {
-                    5 => 7, // five of a kind
-                    4 => 7, // five of a kind
-                    3 => 6, // four of a kind
-                    2 => 3, // three of a kind
-                    1 => 1, // one pair
-                    _ => 0, // all cards distinct
+                    5 => Hand::Five, // five of a kind
+                    4 => Hand::Five, // five of a kind
+                    3 => Hand::Four, // four of a kind
+                    2 => Hand::Three, // three of a kind
+                    1 => Hand::Pair, // one pair
+                    _ => Hand::HighCard, // all cards distinct
                 },
-            }
+            };
         }
 
-        return hand_value;
+        return hand as usize;
     }
-
 }
 
 impl PartialOrd for Camel {
