@@ -4,7 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-URL = "https://adventofcode.com/2023/leaderboard/private/view"
+YEAR = 2023
+URL = f"https://adventofcode.com/{YEAR}/leaderboard/private/view"
 
 me = "Sandr0x00"
 
