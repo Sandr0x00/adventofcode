@@ -9,7 +9,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 5: If You Give A Seed A Fertilizer](2023/05)
 - <img src="res/lang-rust.svg" width="16" /> [Day 6: Wait For It](2023/06)
 - <img src="res/lang-rust.svg" width="16" /> [Day 7: Camel Cards](2023/07)
+- <img src="res/lang-rust.svg" width="16" /> [Day 8: Haunted Wasteland](2023/08)
 
 ## 2022
 
-TODO

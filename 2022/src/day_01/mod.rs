@@ -1,7 +1,7 @@
-use y2022;
+use aoc;
 
 pub fn solve() {
-    let input = y2022::input(1);
+    let input = aoc::input(1);
 
     let mut elves = vec![0];
     let mut elf = 0;
@@ -16,6 +16,6 @@ pub fn solve() {
 
     elves.sort();
     elves.reverse();
-    println!("Part One {}", elves[0]);
-    println!("Part Two {}", elves[..3].iter().sum::<usize>());
+
+    aoc::print_solution(1, &[elves[0], elves[..3].iter().sum::<usize>()])
 }

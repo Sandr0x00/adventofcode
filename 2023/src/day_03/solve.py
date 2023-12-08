@@ -3,7 +3,7 @@ import re
 one = 0
 two = 0
 
-with open("input") as f:
+with open("input.txt") as f:
     field = f.read().strip().splitlines()
 
     # numbers per line

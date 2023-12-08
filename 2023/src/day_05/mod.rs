@@ -59,8 +59,8 @@ fn rek(seeds: &mut Vec<Seed>, s: usize, mapping: &[Mapping]) {
     }
 }
 
-fn main() {
-    let input = fs::read_to_string("input").unwrap();
+pub fn solve() {
+    let input = aoc::input(5);
     let lines: Vec<_> = input.lines().collect();
 
     let seeds: Vec<_> = lines[0][7..].split(' ').filter_map(|w| w.parse::<u64>().ok()).collect();
@@ -144,6 +144,8 @@ fn main() {
         }
     }
 
-    println!("Part One {}", seeds_one.iter().map(|s| s.start).min().unwrap());
-    println!("Part Two {}", seeds_two.iter().map(|s| s.start).min().unwrap());
+    aoc::print_solution(5, &[
+        seeds_one.iter().map(|s| s.start).min().unwrap(),
+        seeds_two.iter().map(|s| s.start).min().unwrap(),
+    ])
 }

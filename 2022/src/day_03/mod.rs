@@ -1,4 +1,4 @@
-use y2022;
+use aoc;
 use std::collections::HashSet;
 
 fn get_matching_value(part1: &str, part2: &str, part3: &str) -> u32 {
@@ -32,7 +32,7 @@ fn get_matching_value(part1: &str, part2: &str, part3: &str) -> u32 {
 }
 
 pub fn solve() {
-    let input = y2022::input(3);
+    let input = aoc::input(3);
 
     let mut score_one = 0;
     let mut score_two = 0;
@@ -57,6 +57,5 @@ pub fn solve() {
         score_one += get_matching_value(parts.0, parts.1, "");
     }
 
-    println!("Part One {}", score_one);
-    println!("Part Two {}", score_two);
+    aoc::print_solution(3, &[score_one, score_two]);
 }

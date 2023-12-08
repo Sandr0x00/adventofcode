@@ -1,7 +1,7 @@
 use std::fs;
 
-fn main() {
-    let contents = fs::read_to_string("input").unwrap();
+pub fn solve() {
+    let contents = aoc::input(4);
 
     let mut sum: u32 = 0;
     // every card has 1 original
@@ -25,6 +25,6 @@ fn main() {
             sum += u32::pow(2, idx as u32);
         }
     }
-    println!("Part One {}", sum);
-    println!("Part Two {}", winnings.iter().sum::<u32>());
+
+    aoc::print_solution(4, &[sum, winnings.iter().sum::<u32>()])
 }

@@ -11,7 +11,7 @@ colors = bag.keys()
 
 one = 0
 two = 0
-with open("input") as f:
+with open("input.txt") as f:
     for line in f.read().splitlines():
         if len(line) == 0:
             continue

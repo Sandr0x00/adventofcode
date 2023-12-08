@@ -1,7 +1,7 @@
-use y2022;
+use aoc;
 
 pub fn solve() {
-    let input = y2022::input(2);
+    let input = aoc::input(2);
 
     let mut score_one: isize = 0;
     let mut score_two: isize = 0;
@@ -46,6 +46,5 @@ pub fn solve() {
         }
     }
 
-    println!("Part One {}", score_one);
-    println!("Part Two {}", score_two);
+    aoc::print_solution(2, &[score_one, score_two])
 }

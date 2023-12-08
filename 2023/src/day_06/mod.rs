@@ -21,8 +21,8 @@ fn ways_to_win(time: usize, record: usize) -> usize {
     max - min + 1
 }
 
-fn main() {
-    let input = fs::read_to_string("input").unwrap();
+pub fn solve() {
+    let input = aoc::input(6);
 
     let mut res_one = 1;
     let data_one = &input
@@ -52,6 +52,8 @@ fn main() {
         })
         .collect::<Vec<_>>();
 
-    println!("Part One {}", res_one);
-    println!("Part Two {}", ways_to_win(data_two[0], data_two[1]));
+    aoc::print_solution(6, &[
+        res_one,
+        ways_to_win(data_two[0], data_two[1]),
+    ])
 }

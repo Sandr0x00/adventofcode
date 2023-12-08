@@ -165,8 +165,8 @@ impl PartialEq for Camel {
     }
 }
 
-fn main() {
-    let input = fs::read_to_string("input").unwrap();
+pub fn solve() {
+    let input = aoc::input(7);
 
     let mut hands_one = Vec::new();
     let mut hands_two = Vec::new();
@@ -198,6 +198,8 @@ fn main() {
         winnings_two += camel.bid * (i + 1);
     }
 
-    println!("Part One {winnings_one}");
-    println!("Part Two {winnings_two}");
+    aoc::print_solution(6, &[
+        winnings_one,
+        winnings_two,
+    ])
 }

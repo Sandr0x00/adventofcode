@@ -17,7 +17,7 @@ two = 0
 re_one = r"(\d)"
 re_two = r"(\d|" + r"|".join(MAP.keys()) + r")"
 
-with open("input") as f:
+with open("input.txt") as f:
     for line in f.read().splitlines():
         if len(line) == 0:
             continue
