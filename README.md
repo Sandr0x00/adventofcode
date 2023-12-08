@@ -2,14 +2,17 @@
 
 ## 2023
 
-- <img src="res/lang-python.svg" width="16" /> [Day 1: Trebuchet?!](2023/01)
-- <img src="res/lang-python.svg" width="16" /> [Day 2: Cube Conundrum](2023/02)
-- <img src="res/lang-python.svg" width="16" /> [Day 3: Gear Ratios](2023/03)
-- <img src="res/lang-rust.svg" width="16" /> [Day 4: Scratchcards](2023/04)
-- <img src="res/lang-rust.svg" width="16" /> [Day 5: If You Give A Seed A Fertilizer](2023/05)
-- <img src="res/lang-rust.svg" width="16" /> [Day 6: Wait For It](2023/06)
-- <img src="res/lang-rust.svg" width="16" /> [Day 7: Camel Cards](2023/07)
-- <img src="res/lang-rust.svg" width="16" /> [Day 8: Haunted Wasteland](2023/08)
+- <img src="res/lang-python.svg" width="16" /> [Day 1: Trebuchet?!](2023/src/day_01)
+- <img src="res/lang-python.svg" width="16" /> [Day 2: Cube Conundrum](2023/src/day_02)
+- <img src="res/lang-python.svg" width="16" /> [Day 3: Gear Ratios](2023/src/day_03)
+- <img src="res/lang-rust.svg" width="16" /> [Day 4: Scratchcards](2023/src/day_04)
+- <img src="res/lang-rust.svg" width="16" /> [Day 5: If You Give A Seed A Fertilizer](2023/src/day_05)
+- <img src="res/lang-rust.svg" width="16" /> [Day 6: Wait For It](2023/src/day_06)
+- <img src="res/lang-rust.svg" width="16" /> [Day 7: Camel Cards](2023/src/day_07)
+- <img src="res/lang-rust.svg" width="16" /> [Day 8: Haunted Wasteland](2023/src/day_08)
 
 ## 2022
 
+- <img src="res/lang-rust.svg" width="16" /> [Day 1: Calorie Counting](2022/src/day_01)
+- <img src="res/lang-rust.svg" width="16" /> [Day 2: Rock Paper Scissors](2022/src/day_02)
+- <img src="res/lang-rust.svg" width="16" /> [Day 3: Rucksack Reorganization](2022/src/day_03)
