@@ -1,10 +1,11 @@
-use std::fs;
 use std::cmp::Ordering;
 use std::collections::HashMap;
 
+const DAY: u8 = 7;
+
 fn card_value(card: char, jokers: bool) -> u32 {
-    if !jokers {
-        return match card {
+    return if !jokers {
+        match card {
             'A' => 14,
             'K' => 13,
             'Q' => 12,
@@ -13,7 +14,7 @@ fn card_value(card: char, jokers: bool) -> u32 {
             _ => card.to_digit(10).unwrap(),
         }
     } else {
-        return match card {
+        match card {
             'A' => 14,
             'K' => 13,
             'Q' => 12,
@@ -166,7 +167,7 @@ impl PartialEq for Camel {
 }
 
 pub fn solve() {
-    let input = aoc::input(7);
+    let input = aoc::input(DAY);
 
     let mut hands_one = Vec::new();
     let mut hands_two = Vec::new();
@@ -198,7 +199,7 @@ pub fn solve() {
         winnings_two += camel.bid * (i + 1);
     }
 
-    aoc::print_solution(6, &[
+    aoc::print_solution(DAY, &[
         winnings_one,
         winnings_two,
     ])

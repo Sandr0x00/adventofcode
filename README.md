@@ -10,6 +10,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 6: Wait For It](2023/src/day_06)
 - <img src="res/lang-rust.svg" width="16" /> [Day 7: Camel Cards](2023/src/day_07)
 - <img src="res/lang-rust.svg" width="16" /> [Day 8: Haunted Wasteland](2023/src/day_08)
+- <img src="res/lang-rust.svg" width="16" /> [Day 9: Mirage Maintenance](2023/src/day_09)
 
 ## 2022
 

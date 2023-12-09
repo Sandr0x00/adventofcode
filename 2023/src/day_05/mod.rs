@@ -1,4 +1,3 @@
-use std::fs;
 
 #[derive(Debug, PartialEq, Clone)]
 enum Mode {
@@ -59,8 +58,10 @@ fn rek(seeds: &mut Vec<Seed>, s: usize, mapping: &[Mapping]) {
     }
 }
 
+const DAY: u8 = 5;
+
 pub fn solve() {
-    let input = aoc::input(5);
+    let input = aoc::input(DAY);
     let lines: Vec<_> = input.lines().collect();
 
     let seeds: Vec<_> = lines[0][7..].split(' ').filter_map(|w| w.parse::<u64>().ok()).collect();
@@ -144,7 +145,7 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(5, &[
+    aoc::print_solution(DAY, &[
         seeds_one.iter().map(|s| s.start).min().unwrap(),
         seeds_two.iter().map(|s| s.start).min().unwrap(),
     ])

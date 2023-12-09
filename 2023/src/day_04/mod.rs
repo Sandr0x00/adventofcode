@@ -1,7 +1,8 @@
-use std::fs;
+
+const DAY: u8 = 4;
 
 pub fn solve() {
-    let contents = aoc::input(4);
+    let contents = aoc::input(DAY);
 
     let mut sum: u32 = 0;
     // every card has 1 original
@@ -26,5 +27,5 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(4, &[sum, winnings.iter().sum::<u32>()])
+    aoc::print_solution(DAY, &[sum, winnings.iter().sum::<u32>()])
 }

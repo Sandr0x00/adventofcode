@@ -1,4 +1,3 @@
-use std::fs;
 
 fn ways_to_win(time: usize, record: usize) -> usize {
     let mut min = 0;
@@ -21,8 +20,10 @@ fn ways_to_win(time: usize, record: usize) -> usize {
     max - min + 1
 }
 
+const DAY: u8 = 6;
+
 pub fn solve() {
-    let input = aoc::input(6);
+    let input = aoc::input(DAY);
 
     let mut res_one = 1;
     let data_one = &input
@@ -52,7 +53,7 @@ pub fn solve() {
         })
         .collect::<Vec<_>>();
 
-    aoc::print_solution(6, &[
+    aoc::print_solution(DAY, &[
         res_one,
         ways_to_win(data_two[0], data_two[1]),
     ])

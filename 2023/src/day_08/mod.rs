@@ -1,5 +1,6 @@
-use std::fs;
 use std::collections::HashMap;
+
+const DAY: u8 = 8;
 
 pub fn lcm(nums: &[usize]) -> usize {
     if nums.len() == 1 {
@@ -19,14 +20,14 @@ fn gcd_of_two_numbers(a: usize, b: usize) -> usize {
     gcd_of_two_numbers(b, a % b)
 }
 
-fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &Vec<char>, start: &str, part_two: bool) -> usize {
+fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &[char], start: &str, part_two: bool) -> usize {
     let mut i = 0;
     let mut next = start;
     while match part_two {
         true => !next.ends_with("Z"),
         false => next != "ZZZ",
     } {
-        let cur = network.get(next).unwrap();
+        let cur = network[next];
         next = match instructions[i % instructions.len()] {
             'L' => cur.0,
             'R' => cur.1,
@@ -39,7 +40,7 @@ fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &Vec<char>, sta
 }
 
 pub fn solve() {
-    let input = aoc::input(8);
+    let input = aoc::input(DAY);
 
     let lines: Vec<_> = input.lines().collect();
     let instructions: Vec<_> = lines[0].chars().collect();
@@ -62,7 +63,7 @@ pub fn solve() {
     }
     let part_two = lcm(&steps);
 
-    aoc::print_solution(8, &[
+    aoc::print_solution(DAY, &[
         part_one,
         part_two,
     ])
