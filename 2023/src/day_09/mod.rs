@@ -1,4 +1,3 @@
-use std::collections::VecDeque;
 
 const DAY: u8 = 9;
 
