@@ -1,7 +1,8 @@
+use std::collections::HashSet;
 
 const DAY: u8 = 11;
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Hash)]
 struct Pos {
     x: isize,
     y: isize,
@@ -9,11 +10,11 @@ struct Pos {
 
 fn traverse(expanded_galaxies: &Vec<Pos>) -> isize {
     let mut sum = 0;
-    let mut done = Vec::new();
+    let mut done = HashSet::new();
     for p1 in expanded_galaxies {
-        done.push(p1);
+        done.insert(p1);
         for p2 in expanded_galaxies {
-            if done.contains(&p2) {
+            if done.contains(p2) {
                 continue;
             }
             sum += (p2.x - p1.x).abs() + (p2.y - p1.y).abs();
@@ -28,21 +29,16 @@ pub fn solve() {
 
     let rows: Vec<_> = input.lines().collect();
 
-    let mut empty_cols: Vec<isize> = Vec::new();
-    for i in 0..rows[0].len() {
-        empty_cols.push(i as isize);
-    }
+    let mut empty_cols: Vec<_> = (0..rows[0].len() as isize).collect();
     let mut empty_rows: Vec<isize> = Vec::new();
 
     let mut galaxies: Vec<_> = Vec::new();
 
     // expansion
     for (line, y) in rows.iter().zip(0isize..) {
-        let row: Vec<_> = line.chars().collect();
-
         let mut galaxy_in_row = false;
-        for (c, x) in row.iter().zip(0isize..) {
-            if *c == '#' {
+        for (c, x) in line.chars().zip(0isize..) {
+            if c == '#' {
                 galaxies.push(Pos{x, y});
                 galaxy_in_row = true;
                 if empty_cols.contains(&x) {
@@ -60,8 +56,8 @@ pub fn solve() {
     let mut expanded_galaxies_one = Vec::new();
     let mut expanded_galaxies_two = Vec::new();
     for Pos{x, y} in &galaxies {
-        let x_expansion = empty_cols.iter().filter(|i| i < &x).count() as isize;
-        let y_expansion = empty_rows.iter().filter(|i| i < &y).count() as isize;
+        let x_expansion = empty_cols.iter().take_while(|i| i < &x).count() as isize;
+        let y_expansion = empty_rows.iter().take_while(|i| i < &y).count() as isize;
         expanded_galaxies_one.push(Pos {
             x: x + x_expansion,
             y: y + y_expansion,

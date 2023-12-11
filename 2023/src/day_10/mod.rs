@@ -1,6 +1,9 @@
 use petgraph::graphmap::{UnGraphMap, GraphMap};
 use petgraph::visit::Bfs;
 use petgraph::prelude::Undirected;
+// use petgraph_evcxr::draw_graph;
+use std::collections::HashSet;
+use std::time::Instant;
 
 const DAY: u8 = 10;
 const SIZE: usize = 1000;
@@ -12,171 +15,132 @@ fn get_xy(num: usize) -> (usize, usize) {
     (x,y)
 }
 
+fn add(g: &mut GraphMap<usize, usize, Undirected>, max: (isize, isize), p1: (isize, isize), p2: (isize, isize)) {
+    if p1.0 < 0 || p1.1 < 0 || p1.0 > max.0 * 2 || p1.1 > max.1 * 2 {
+        return;
+    }
+    if p2.0 < 0 || p2.1 < 0 || p2.0 > max.0 * 2 || p2.1 > max.1 * 2 {
+        return;
+    }
 
-fn traverse(matrix: &[Vec<char>], x_max: usize, y_max: usize, final_dots: bool) -> (GraphMap<usize, usize, Undirected>, Vec<usize>, usize) {
-    let mut dots = Vec::new();
+    g.add_edge((p1.0 + p1.1 * SIZE as isize) as usize, (p2.0 + p2.1 * SIZE as isize) as usize, 0);
+}
+
+
+fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (GraphMap<usize, usize, Undirected>, HashSet<usize>, usize) {
+    let mut dots = HashSet::new();
 
     let mut start = 0;
     let mut graph: GraphMap<_, _, Undirected> = UnGraphMap::new();
 
-    if !final_dots {
-        for y in 0..y_max + 1 {
-            for x in 0..x_max + 1 {
-                let c = matrix[y][x];
-                let cur_x = x * 2;
-                let cur_y = y * 2;
-                dots.push(cur_x + cur_y * SIZE);
+    for y in 0..max.1 + 1 {
+        for x in 0..max.0 + 1 {
+            let c = matrix[y as usize][x as usize];
+            let cur_x = x * 2;
+            let cur_y = y * 2;
+
+            if !final_dots {
+                let cur = (cur_x, cur_y);
+                dots.insert(cur_x as usize + cur_y as usize * SIZE);
                 match c {
                     '|' => {
-                        if y > 0 && y < y_max {
-                            graph.add_edge(cur_x + (cur_y - 1) * SIZE, cur_x + (cur_y    ) * SIZE, 0);
-                            graph.add_edge(cur_x + (cur_y    ) * SIZE, cur_x + (cur_y + 1) * SIZE, 0);
-                        }
+                        add(&mut graph, max, cur, (cur_x,     cur_y - 1));
+                        add(&mut graph, max, cur, (cur_x,     cur_y + 1));
                     },
                     '-' => {
-                        if x > 0 && x < x_max {
-                            graph.add_edge(cur_x - 1 + cur_y * SIZE, cur_x     + cur_y * SIZE, 0);
-                            graph.add_edge(cur_x     + cur_y * SIZE, cur_x + 1 + cur_y * SIZE, 0);
-                        }
+                        add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
                     },
                     'L' => {
-                        if y > 0 && x < x_max {
-                            graph.add_edge(cur_x + (cur_y - 1) * SIZE, cur_x     + cur_y * SIZE, 0);
-                            graph.add_edge(cur_x + (cur_y    ) * SIZE, cur_x + 1 + cur_y * SIZE, 0);
-                        }
+                        add(&mut graph, max, cur, (cur_x,     cur_y - 1));
+                        add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
                     },
                     'J' => {
-                        if x > 0 && y > 0 {
-                            graph.add_edge(cur_x + (cur_y - 1) * SIZE, cur_x     + cur_y * SIZE, 0);
-                            graph.add_edge(cur_x + (cur_y    ) * SIZE, cur_x - 1 + cur_y * SIZE, 0);
-                        }
+                        add(&mut graph, max, cur, (cur_x,     cur_y - 1));
+                        add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
                     },
                     '7' => {
-                        if x > 0 && y < y_max {
-                            graph.add_edge(cur_x + (cur_y    ) * SIZE, cur_x - 1 + cur_y * SIZE, 0);
-                            graph.add_edge(cur_x + (cur_y + 1) * SIZE, cur_x     + cur_y * SIZE, 0);
-                        }
+                        add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, cur, (cur_x,     cur_y + 1));
                     },
                     'F' => {
-                        if x < x_max && y < y_max {
-                            graph.add_edge(cur_x + (cur_y    ) * SIZE, cur_x + 1 + cur_y * SIZE, 0);
-                            graph.add_edge(cur_x + (cur_y + 1) * SIZE, cur_x     + cur_y * SIZE, 0);
-                        }
+                        add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
+                        add(&mut graph, max, cur, (cur_x,     cur_y + 1));
                     },
                     'S' => {
                         // S is connected to all 4 sides
-                        if y > 0 {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x + (cur_y - 1) * SIZE, 0);
-                        }
-                        if y < y_max {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x + (cur_y + 1) * SIZE, 0);
-                        }
-                        if x > 0 {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x - 1 + cur_y * SIZE, 0);
-                        }
-                        if x < x_max {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x + 1 + cur_y * SIZE, 0);
-                        }
-                        start = cur_x + cur_y * SIZE;
+                        add(&mut graph, max, cur, (cur_x,     cur_y - 1));
+                        add(&mut graph, max, cur, (cur_x,     cur_y + 1));
+                        add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
+                        start = cur_x as usize + cur_y as usize * SIZE;
                     },
                     '.' => {},
                     _ => {},
                 };
-            }
-        }
-    } else {
-        for y in 0..y_max + 1 {
-            for x in 0..x_max + 1 {
-                let c = matrix[y][x];
-                let cur_x = x * 2;
-                let cur_y = y * 2;
-                if !final_dots {
-                    dots.push(cur_x + cur_y * SIZE);
-                }
+            } else {
                 match c {
                     '|' => {
-                        if y > 0 && y < y_max {
-                            if x > 0 {
-                                graph.add_edge(cur_x - 1 + (cur_y - 1) * SIZE, cur_x - 1 + cur_y       * SIZE, 0);
-                                graph.add_edge(cur_x - 1 + cur_y       * SIZE, cur_x - 1 + (cur_y + 1) * SIZE, 0);
-                            }
-                            if x < x_max {
-                                graph.add_edge(cur_x + 1 + (cur_y - 1) * SIZE, cur_x + 1 + cur_y * SIZE, 0);
-                                graph.add_edge(cur_x + 1 + cur_y * SIZE, cur_x + 1 + (cur_y + 1) * SIZE, 0);
-                            }
-                        }
+                        // X X
+                        // X|X
+                        // X X
+                        add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, (cur_x - 1, cur_y    ), (cur_x - 1, cur_y + 1));
+                        add(&mut graph, max, (cur_x + 1, cur_y - 1), (cur_x + 1, cur_y    ));
+                        add(&mut graph, max, (cur_x + 1, cur_y    ), (cur_x + 1, cur_y + 1));
                     },
                     '-' => {
-                        if x > 0 && x < x_max {
-                            if y > 0 {
-                                graph.add_edge(cur_x - 1 + (cur_y - 1) * SIZE, cur_x     + (cur_y - 1) * SIZE, 0);
-                                graph.add_edge(cur_x     + (cur_y - 1) * SIZE, cur_x + 1 + (cur_y - 1) * SIZE, 0);
-                            }
-                            if y < y_max {
-                                graph.add_edge(cur_x - 1 + (cur_y + 1) * SIZE, cur_x     + (cur_y + 1) * SIZE, 0);
-                                graph.add_edge(cur_x     + (cur_y + 1) * SIZE, cur_x + 1 + (cur_y + 1) * SIZE, 0);
-                            }
-                        }
+                        // XXX
+                        //  -
+                        // XXX
+                        add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x,     cur_y - 1));
+                        add(&mut graph, max, (cur_x,     cur_y - 1), (cur_x + 1, cur_y - 1));
+                        add(&mut graph, max, (cur_x - 1, cur_y + 1), (cur_x,     cur_y + 1));
+                        add(&mut graph, max, (cur_x,     cur_y + 1), (cur_x + 1, cur_y + 1));
                     },
                     'L' => {
-                        if y > 0 && x < x_max && y < y_max && x > 0 {
-                            // XL
-                            graph.add_edge(cur_x - 1 + (cur_y - 1) * SIZE, cur_x - 1 + cur_y       * SIZE, 0);
-                            graph.add_edge(cur_x - 1 + cur_y       * SIZE, cur_x - 1 + (cur_y + 1) * SIZE, 0);
-                            //  L
-                            //  X
-                            graph.add_edge(cur_x - 1 + (cur_y + 1) * SIZE, cur_x     + (cur_y + 1) * SIZE, 0);
-                            graph.add_edge(cur_x     + (cur_y + 1) * SIZE, cur_x + 1 + (cur_y + 1) * SIZE, 0);
-                        }
+                        // XL
+                        add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, (cur_x - 1, cur_y    ), (cur_x - 1, cur_y + 1));
+                        //  L
+                        //  X
+                        add(&mut graph, max, (cur_x - 1, cur_y + 1), (cur_x,     cur_y + 1));
+                        add(&mut graph, max, (cur_x,     cur_y + 1), (cur_x + 1, cur_y + 1));
                     },
                     'J' => {
-                        if x > 0 && y > 0 && y < y_max && x < x_max {
-                            // JX
-                            graph.add_edge(cur_x + 1 + (cur_y - 1) * SIZE, cur_x + 1 + (cur_y    ) * SIZE, 0);
-                            graph.add_edge(cur_x + 1 + (cur_y    ) * SIZE, cur_x + 1 + (cur_y + 1) * SIZE, 0);
-                            // J
-                            // X
-                            graph.add_edge(cur_x - 1 + (cur_y + 1) * SIZE, cur_x     + (cur_y + 1) * SIZE, 0);
-                            graph.add_edge(cur_x     + (cur_y + 1) * SIZE, cur_x + 1 + (cur_y + 1) * SIZE, 0);
-                        }
+                        // JX
+                        add(&mut graph, max, (cur_x + 1, cur_y - 1), (cur_x + 1, cur_y    ));
+                        add(&mut graph, max, (cur_x + 1, cur_y    ), (cur_x + 1, cur_y + 1));
+                        // J
+                        // X
+                        add(&mut graph, max, (cur_x - 1, cur_y + 1), (cur_x,     cur_y + 1));
+                        add(&mut graph, max, (cur_x,     cur_y + 1), (cur_x + 1, cur_y + 1));
                     },
                     '7' => {
-                        if x > 0 && y < y_max && y > 0 && x < x_max {
-                            // 7X
-                            graph.add_edge(cur_x + 1 + (cur_y - 1) * SIZE, cur_x + 1 + (cur_y    ) * SIZE, 0);
-                            graph.add_edge(cur_x + 1 + (cur_y    ) * SIZE, cur_x + 1 + (cur_y + 1) * SIZE, 0);
-                            // X
-                            // 7
-                            graph.add_edge(cur_x - 1 + (cur_y - 1) * SIZE, cur_x     + (cur_y - 1) * SIZE, 0);
-                            graph.add_edge(cur_x     + (cur_y - 1) * SIZE, cur_x + 1 + (cur_y - 1) * SIZE, 0);
-                        }
+                        // 7X
+                        add(&mut graph, max, (cur_x + 1, cur_y - 1), (cur_x + 1, cur_y    ));
+                        add(&mut graph, max, (cur_x + 1, cur_y    ), (cur_x + 1, cur_y + 1));
+                        // X
+                        // 7
+                        add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x,     cur_y - 1));
+                        add(&mut graph, max, (cur_x,     cur_y - 1), (cur_x + 1, cur_y - 1));
                     },
                     'F' => {
-                        if x < x_max && y < y_max && y > 0 && x > 0 {
-                            //  X
-                            //  F
-                            graph.add_edge(cur_x - 1 + (cur_y - 1) * SIZE, cur_x     + (cur_y - 1) * SIZE, 0);
-                            graph.add_edge(cur_x     + (cur_y - 1) * SIZE, cur_x + 1 + (cur_y - 1) * SIZE, 0);
-                            // XF
-                            graph.add_edge(cur_x - 1 + (cur_y - 1) * SIZE, cur_x - 1 + (cur_y    ) * SIZE, 0);
-                            graph.add_edge(cur_x - 1 + (cur_y    ) * SIZE, cur_x - 1 + (cur_y + 1) * SIZE, 0);
-                        }
+                        //  X
+                        //  F
+                        add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x,     cur_y - 1));
+                        add(&mut graph, max, (cur_x    , cur_y - 1), (cur_x + 1, cur_y - 1));
+                        // XF
+                        add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, (cur_x - 1, cur_y    ), (cur_x - 1, cur_y + 1));
                     },
                     'S' => {},
                     '.' => {
-                        if y > 0 {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x + (cur_y - 1) * SIZE, 0);
-                        }
-                        if y < y_max {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x + (cur_y + 1) * SIZE, 0);
-                        }
-                        if x > 0 {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x - 1 + cur_y * SIZE, 0);
-                        }
-                        if x < x_max {
-                            graph.add_edge(cur_x + cur_y * SIZE, cur_x + 1 + cur_y * SIZE, 0);
-                        }
-                        dots.push(cur_x + cur_y * SIZE);
+                        add(&mut graph, max, (cur_x,     cur_y    ), (cur_x,     cur_y - 1));
+                        add(&mut graph, max, (cur_x,     cur_y    ), (cur_x,     cur_y + 1));
+                        add(&mut graph, max, (cur_x,     cur_y    ), (cur_x - 1, cur_y    ));
+                        add(&mut graph, max, (cur_x,     cur_y    ), (cur_x + 1, cur_y    ));
+                        dots.insert(cur_x as usize + cur_y as usize * SIZE);
                     },
                     _ => {},
                 };
@@ -191,23 +155,27 @@ pub fn solve() {
     let input = aoc::input(DAY);
 
     let rows = input.lines().collect::<Vec<_>>();
-    // let y_max = .len() - 1;
-    // let x_max = input.lines().collect::<Vec<_>>()[0].len() - 1;
-    let y_max = rows.len() - 1;
-    let x_max = rows[0].len() - 1;
+    let max = (
+        (rows.len() - 1) as isize,
+        (rows[0].len() - 1) as isize,
+    );
+
+
     let mut matrix = Vec::new();
     for line in rows.iter() {
         matrix.push(line.chars().collect());
     }
 
-    let (graph, mut dots, start) = traverse(&matrix, x_max, y_max, false);
+    let (graph, mut dots, start) = traverse(&matrix, max, false);
+
+    // draw_graph(&graph);
 
     let mut bfs = Bfs::new(&graph, start);
 
     let mut dist = 0;
     while let Some(visited) = bfs.next(&graph) {
         dist += 1;
-        dots.retain(|&x| x != visited);
+        dots.remove(&visited);
     }
 
     // update "real" dots
@@ -215,42 +183,44 @@ pub fn solve() {
         let (x, y) = get_xy(d);
         matrix[y][x] = '.';
     }
-    let (non_graph, final_dots, _) = traverse(&matrix, x_max, y_max, true);
+    let (non_graph, final_dots, _) = traverse(&matrix, max, true);
 
-    let mut inside = Vec::new();
+    let mut known_outside = HashSet::new();
+
+    for x in 0..max.0 + 1 {
+        known_outside.insert((x * 2) as usize);
+        known_outside.insert((x * 2 + max.1 * 2 * SIZE as isize) as usize);
+    }
+
+    for y in 0..max.1 + 1 {
+        known_outside.insert((y * 2 * SIZE as isize) as usize);
+        known_outside.insert((max.0 * 2 + y * 2 * SIZE as isize) as usize);
+    }
+
+
+    // let start_time = Instant::now();
+    // this takes quite long (10s), maybe future improvement
+    let mut inside = 0;
     for d in final_dots {
-        bfs = Bfs::new(&non_graph, d);
+        if known_outside.contains(&d) {
+            // trivial outside
+            continue;
+        }
+
+        let mut search = Bfs::new(&non_graph, d);
         let mut outside = false;
-        while let Some(visited) = bfs.next(&non_graph) {
-            for x in 0..x_max + 1 {
-                if visited == (x * 2) {
-                    outside = true;
-                    break;
-                }
-                if visited == (x * 2 + y_max * 2 * SIZE) {
-                    outside = true;
-                    break;
-                }
-            }
-            for y in 0..y_max + 1 {
-                if visited == (y * 2 * SIZE) {
-                    outside = true;
-                    break;
-                }
-                if visited == (x_max * 2 + y * 2 * SIZE) {
-                    outside = true;
-                    break;
-                }
-            }
-            if outside {
+        while let Some(visited) = search.next(&non_graph) {
+            if known_outside.contains(&visited) {
+                outside = true;
                 break;
             }
         }
 
         if !outside {
-            inside.push(d)
+            inside += 1;
         }
     }
+    // println!("runtime: {:?}", start_time.elapsed());
 
-    aoc::print_solution(DAY, &[(dist / 4), inside.len()]);
+    aoc::print_solution(DAY, &[(dist / 4), inside]);
 }
