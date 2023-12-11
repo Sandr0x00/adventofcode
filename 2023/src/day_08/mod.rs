@@ -24,7 +24,7 @@ fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &[char], start:
     let mut i = 0;
     let mut next = start;
     while match part_two {
-        true => !next.ends_with("Z"),
+        true => !next.ends_with('Z'),
         false => next != "ZZZ",
     } {
         let cur = network[next];
@@ -51,7 +51,7 @@ pub fn solve() {
         let (node, lr) = line.split_once(" = ").unwrap();
         let (l, r) = lr.split_once(", ").unwrap();
         network.insert(node, (&l[1..], &r[..3]));
-        if node.ends_with("A") {
+        if node.ends_with('A') {
             starts.push(node);
         }
     }

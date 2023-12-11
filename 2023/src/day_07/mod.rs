@@ -4,7 +4,7 @@ use std::collections::HashMap;
 const DAY: u8 = 7;
 
 fn card_value(card: char, jokers: bool) -> u32 {
-    return if !jokers {
+    if !jokers {
         match card {
             'A' => 14,
             'K' => 13,
@@ -128,7 +128,7 @@ impl Camel {
             };
         }
 
-        return hand as usize;
+        hand as usize
     }
 }
 
@@ -153,9 +153,10 @@ impl Ord for Camel {
                     return Ordering::Greater;
                 }
             }
-            return Ordering::Equal;
+
+            Ordering::Equal
         } else {
-            return own_hand.cmp(&other_hand);
+            own_hand.cmp(&other_hand)
         }
     }
 }
