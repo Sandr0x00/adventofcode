@@ -13,6 +13,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 9: Mirage Maintenance](2023/src/day_09)
 - <img src="res/lang-rust.svg" width="16" /> [Day 10: Pipe Maze](2023/src/day_10)
 - <img src="res/lang-rust.svg" width="16" /> [Day 11: Cosmic Expansion](2023/src/day_11)
+- <img src="res/lang-rust.svg" width="16" /> [Day 14: Parabolic Reflector Dish](2023/src/day_14)
 
 ## 2022
 
