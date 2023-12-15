@@ -18,8 +18,8 @@ fn load(matrix: &mut [Vec<u8>], max: (usize, usize)) -> usize{
 fn tilt_north(matrix: &mut [Vec<u8>], max: (usize, usize)) {
     let mut off_list = vec![0; max.0];
 
-    for x in 0..max.0 {
-        for y in 0..max.1 {
+    for y in 0..max.1 {
+        for x in 0..max.0 {
             if matrix[y][x] == b'O' {
                 // swap
                 matrix[y][x] = b'.';
@@ -37,8 +37,8 @@ fn tilt_north(matrix: &mut [Vec<u8>], max: (usize, usize)) {
 fn tilt_west(matrix: &mut [Vec<u8>], max: (usize, usize)) {
     let mut off_list = vec![0; max.1];
 
-    for x in 0..max.0 {
-        for y in 0..max.1 {
+    for y in 0..max.1 {
+        for x in 0..max.0 {
             if matrix[y][x] == b'O' {
                 // swap
                 matrix[y][x] = b'.';
@@ -56,8 +56,8 @@ fn tilt_west(matrix: &mut [Vec<u8>], max: (usize, usize)) {
 fn tilt_south(matrix: &mut [Vec<u8>], max: (usize, usize)) {
     let mut off_list = vec![max.1 - 1; max.0];
 
-    for x in 0..max.0 {
-        for y in (0..max.1).rev() {
+    for y in (0..max.1).rev() {
+        for x in 0..max.0 {
             if matrix[y][x] == b'O' {
                 // swap
                 matrix[y][x] = b'.';
@@ -77,8 +77,8 @@ fn tilt_south(matrix: &mut [Vec<u8>], max: (usize, usize)) {
 fn tilt_east(matrix: &mut [Vec<u8>], max: (usize, usize)) {
     let mut off_list = vec![max.0 - 1; max.1];
 
-    for x in (0..max.0).rev() {
-        for y in 0..max.1 {
+    for y in 0..max.1 {
+        for x in (0..max.0).rev() {
             if matrix[y][x] == b'O' {
                 // swap
                 matrix[y][x] = b'.';
@@ -106,6 +106,7 @@ fn pretty(matrix: &[Vec<u8>]) {
     }
 }
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 
@@ -139,11 +140,9 @@ pub fn solve() {
         tilt_east(&mut matrix, max);
         // pretty(&matrix);
 
-        if !memo.contains_key(&matrix) {
-            memo.insert(matrix.clone(), cycle);
-        } else {
+        if let Some(last_seen) = memo.insert(matrix.clone(), cycle) {
             // fast forward (if possible)
-            let cycle_len = cycle - memo.get(&matrix).unwrap();
+            let cycle_len = cycle - last_seen;
             // 9  +=     7     * ((   100    - 1 -   9  ) /     7    )
             // 9  += 7 * 12 => 93
             // not the perfect solution, but easy enough

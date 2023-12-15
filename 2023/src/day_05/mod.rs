@@ -60,6 +60,7 @@ fn rek(seeds: &mut Vec<Seed>, s: usize, mapping: &[Mapping]) {
 
 const DAY: u8 = 5;
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
     let lines: Vec<_> = input.lines().collect();

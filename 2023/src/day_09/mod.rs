@@ -1,6 +1,7 @@
 
 const DAY: u8 = 9;
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 

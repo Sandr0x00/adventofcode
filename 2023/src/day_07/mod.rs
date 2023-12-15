@@ -167,6 +167,7 @@ impl PartialEq for Camel {
     }
 }
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 

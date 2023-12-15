@@ -1,16 +1,16 @@
 
-// mod day_04;
-// mod day_05;
-// mod day_06;
-// mod day_07;
-// mod day_08;
-// mod day_09;
-// mod day_10;
-// mod day_11;
+mod day_04;
+mod day_05;
+mod day_06;
+mod day_07;
+mod day_08;
+mod day_09;
+mod day_10;
+mod day_11;
 // mod day_12;
-// mod day_13;
+mod day_13;
 mod day_14;
-// mod day_15;
+mod day_15;
 // mod day_16;
 // mod day_17;
 // mod day_18;
@@ -21,9 +21,11 @@ mod day_14;
 // mod day_23;
 // mod day_24;
 // mod day_25;
+use std::time::Instant;
 
 fn main() {
     // 1 - 3 done in python
+    let start_time = Instant::now();
     // day_04::solve();
     // day_05::solve();
     // day_06::solve();
@@ -34,8 +36,8 @@ fn main() {
     // day_11::solve();
     // day_12::solve();
     // day_13::solve();
-    day_14::solve();
-    // day_15::solve();
+    // day_14::solve();
+    day_15::solve();
     // day_16::solve();
     // day_17::solve();
     // day_18::solve();
@@ -46,4 +48,5 @@ fn main() {
     // day_23::solve();
     // day_24::solve();
     // day_25::solve();
+    println!("Took {:?}", start_time.elapsed());
 }

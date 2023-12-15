@@ -22,6 +22,7 @@ fn ways_to_win(time: usize, record: usize) -> usize {
 
 const DAY: u8 = 6;
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 

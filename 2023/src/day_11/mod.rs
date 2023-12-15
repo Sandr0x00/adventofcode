@@ -24,6 +24,7 @@ fn traverse(expanded_galaxies: &Vec<Pos>) -> isize {
     sum
 }
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 

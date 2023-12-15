@@ -39,6 +39,7 @@ fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &[char], start:
     i
 }
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 

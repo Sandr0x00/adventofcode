@@ -16,6 +16,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 12: Hot Springs](2023/src/day_12)
 - <img src="res/lang-rust.svg" width="16" /> [Day 13: Point of Incidence](2023/src/day_13)
 - <img src="res/lang-rust.svg" width="16" /> [Day 14: Parabolic Reflector Dish](2023/src/day_14)
+- <img src="res/lang-rust.svg" width="16" /> [Day 15: Lens Library](2023/src/day_15)
 
 ## 2022
 

@@ -3,7 +3,6 @@ use petgraph::visit::Bfs;
 use petgraph::prelude::Undirected;
 // use petgraph_evcxr::draw_graph;
 use std::collections::HashSet;
-use std::time::Instant;
 
 const DAY: u8 = 10;
 const SIZE: usize = 1000;
@@ -151,6 +150,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
     (graph, dots, start)
 }
 
+#[allow(dead_code)]
 pub fn solve() {
     let input = aoc::input(DAY);
 
@@ -198,7 +198,6 @@ pub fn solve() {
     }
 
 
-    // let start_time = Instant::now();
     // this takes quite long (10s), maybe future improvement
     let mut inside = 0;
     for d in final_dots {
@@ -220,7 +219,6 @@ pub fn solve() {
             inside += 1;
         }
     }
-    // println!("runtime: {:?}", start_time.elapsed());
 
     aoc::print_solution(DAY, &[(dist / 4), inside]);
 }
