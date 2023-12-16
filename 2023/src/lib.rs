@@ -31,3 +31,13 @@ pub fn print_solution<T: std::fmt::Display>(day: u8, parts: &[T]) {
 pub fn todo(day: u8) {
     println!("\nDay {day}\nNot yet solved.");
 }
+
+pub fn print_matrix(matrix: &[Vec<u8>]) {
+    println!();
+    for row in matrix {
+        for c in row {
+            print!("{}", *c as char);
+        }
+        println!()
+    }
+}
