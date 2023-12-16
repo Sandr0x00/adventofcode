@@ -26,7 +26,7 @@ pub fn solve() {
                 },
                 b'0'..=b'9' => {
                     // data => we expect a = to be before that, but never actually verify that - taking shortcuts here
-                    let lens = *c - 0x30;
+                    let lens = *c - b'0';
 
                     // this way we retain the ordering independently of removals since a new one will always be at the end
                     max_order[label_hash as usize] += 1;
@@ -60,7 +60,7 @@ pub fn solve() {
         let mut box_vec: Vec<_> = box_map.iter().map(|(_, data)| data).collect();
 
         // order according to position
-        box_vec.sort_by(|a, b| a.0.cmp(&b.0));
+        box_vec.sort_by_key(|x| x.0);
 
         for (slot, (_, lens)) in box_vec.iter().enumerate() {
             sum_two += (box_no + 1) * (slot + 1) * (*lens as usize);
