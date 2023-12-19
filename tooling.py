@@ -95,6 +95,8 @@ def build_readme():
             language = None
             if os.path.exists(f"{folder}/solve.py"):
                 language = "lang-python.svg"
+            elif os.path.exists(f"{folder}/solve.js"):
+                language = "lang-js.svg"
             elif os.path.exists(f"{folder}/mod.rs"):
                 language = "lang-rust.svg"
 

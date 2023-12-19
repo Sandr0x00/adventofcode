@@ -19,6 +19,8 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 15: Lens Library](2023/src/day_15)
 - <img src="res/lang-rust.svg" width="16" /> [Day 16: The Floor Will Be Lava](2023/src/day_16)
 - <img src="res/lang-rust.svg" width="16" /> [Day 17: Clumsy Crucible](2023/src/day_17)
+- <img src="res/lang-rust.svg" width="16" /> [Day 18: Lavaduct Lagoon](2023/src/day_18)
+- <img src="res/lang-js.svg" width="16" /> [Day 19: Aplenty](2023/src/day_19)
 
 ## 2022
 
