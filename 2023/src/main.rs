@@ -18,7 +18,7 @@ mod day_16;
 mod day_17;
 mod day_18;
 // mod day_19; JavaScript
-// mod day_20;
+mod day_20;
 // mod day_21;
 // mod day_22;
 // mod day_23;
@@ -43,9 +43,9 @@ fn main() {
     // day_15::solve();
     // day_16::solve();
     // day_17::solve();
-    day_18::solve();
+    // day_18::solve();
     // 19 done in JS
-    // day_20::solve();
+    day_20::solve();
     // day_21::solve();
     // day_22::solve();
     // day_23::solve();

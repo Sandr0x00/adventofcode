@@ -21,6 +21,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 17: Clumsy Crucible](2023/src/day_17)
 - <img src="res/lang-rust.svg" width="16" /> [Day 18: Lavaduct Lagoon](2023/src/day_18)
 - <img src="res/lang-js.svg" width="16" /> [Day 19: Aplenty](2023/src/day_19)
+- <img src="res/lang-rust.svg" width="16" /> [Day 20: Pulse Propagation](2023/src/day_20)
 
 ## 2022
 
