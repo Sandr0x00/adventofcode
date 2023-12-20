@@ -1,5 +1,8 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::collections::VecDeque;
+use petgraph::Directed;
+use petgraph::graphmap::GraphMap;
+use petgraph_evcxr::draw_graph;
 
 const DAY: u8 = 20;
 
@@ -57,11 +60,18 @@ impl Module {
     }
 }
 
-fn button_press(modules: &mut HashMap<String, Module>) -> (usize, usize) {
+fn button_press(modules: &mut HashMap<String, Module>) -> (bool, (usize, usize)) {
     let mut cnt = (0, 0);
     let mut call_list = VecDeque::new();
+    let mut found = false;
     call_list.push_back(("roadcaster".to_owned(), "".to_owned(), false));
     while let Some((i, j, k)) = call_list.pop_front() {
+        if (i == "bh" || i == "dl" || i == "vd" || i == "ns") && !k {
+            if DEBUG {
+                println!("{} {} => {}", j, k, i);
+            }
+            found = true;
+        }
         match k {
             false => cnt.0 += 1,
             true => cnt.1 += 1,
@@ -78,7 +88,7 @@ fn button_press(modules: &mut HashMap<String, Module>) -> (usize, usize) {
         }
         println!();
     }
-    cnt
+    (found, cnt)
 }
 
 #[allow(dead_code)]
@@ -86,8 +96,22 @@ pub fn solve() {
     let input = aoc::input(DAY);
 
     let mut input_map: HashMap<String, Vec<String>> = HashMap::new();
-
     let mut modules = HashMap::new();
+
+    if DEBUG {
+        // see visualization.png
+        let mut graph: GraphMap<&str, &str, Directed> = GraphMap::new();
+        for line in input.lines() {
+            let (name_raw, next_str) = line.split_once(" -> ").unwrap();
+            let next: Vec<_> = next_str.split(", ").collect();
+            let name = &name_raw[1..];
+            for i in next {
+                graph.add_edge(name, i, &name_raw[0..1]);
+            }
+        }
+        draw_graph(&graph);
+    }
+
     // load modules
     for line in input.lines() {
         let (name_raw, next_str) = line.split_once(" -> ").unwrap();
@@ -115,13 +139,29 @@ pub fn solve() {
     }
 
     let mut cnt = (0,0);
-    for _ in 0..1000 {
-        let res = button_press(&mut modules);
-        cnt.0 += res.0;
-        cnt.1 += res.1;
+    let mut vals = [0; 4];
+    // split up, see visualization.png
+    for (j, n) in ["ls", "bv", "dc", "br"].iter().enumerate() {
+        modules.entry("roadcaster".to_owned()).and_modify(|v| v.next = vec![n.to_string()]);
+        for i in 0..10000 {
+            let (res, add) = button_press(&mut modules);
+            if i < 1000 {
+                cnt.0 += add.0;
+                cnt.1 += add.1;
+            }
+            if res {
+                // +1 for pulse to zh
+                vals[j] = i + 1;
+                if DEBUG {
+                    println!("min {}", i + 1);
+                }
+                break;
+            }
+        }
     }
 
-    // TODO: Part 2
+    // we count initial low pulse from broadcaster x4 => 3 times too much
+    cnt.0 -= 3000;
 
-    aoc::print_solution(DAY, &[cnt.0 * cnt.1]);
+    aoc::print_solution(DAY, &[cnt.0 * cnt.1, aoc::lcm(&vals)]);
 }
