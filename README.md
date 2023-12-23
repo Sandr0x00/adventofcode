@@ -22,6 +22,8 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 18: Lavaduct Lagoon](2023/src/day_18)
 - <img src="res/lang-js.svg" width="16" /> [Day 19: Aplenty](2023/src/day_19)
 - <img src="res/lang-rust.svg" width="16" /> [Day 20: Pulse Propagation](2023/src/day_20)
+- <img src="res/lang-rust.svg" width="16" /> [Day 21: Step Counter](2023/src/day_21)
+- <img src="res/lang-rust.svg" width="16" /> [Day 23: A Long Walk](2023/src/day_23)
 
 ## 2022
 

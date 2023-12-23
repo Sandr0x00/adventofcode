@@ -19,9 +19,9 @@ mod day_17;
 mod day_18;
 // mod day_19; JavaScript
 mod day_20;
-// mod day_21;
+mod day_21;
 // mod day_22;
-// mod day_23;
+mod day_23;
 // mod day_24;
 // mod day_25;
 use std::time::Instant;
@@ -45,10 +45,10 @@ fn main() {
     // day_17::solve();
     // day_18::solve();
     // 19 done in JS
-    day_20::solve();
+    // day_20::solve();
     // day_21::solve();
     // day_22::solve();
-    // day_23::solve();
+    day_23::solve();
     // day_24::solve();
     // day_25::solve();
     println!("Took {:?}", start_time.elapsed());
