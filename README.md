@@ -24,6 +24,8 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 20: Pulse Propagation](2023/src/day_20)
 - <img src="res/lang-rust.svg" width="16" /> [Day 21: Step Counter](2023/src/day_21)
 - <img src="res/lang-rust.svg" width="16" /> [Day 23: A Long Walk](2023/src/day_23)
+- <img src="res/lang-rust.svg" width="16" /> [Day 24: Never Tell Me The Odds](2023/src/day_24)
+- <img src="res/lang-rust.svg" width="16" /> [Day 25: Snowverload](2023/src/day_25)
 
 ## 2022
 
