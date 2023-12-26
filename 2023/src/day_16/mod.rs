@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-const DAY: u8 = 16;
-
 #[derive(Debug, PartialEq, Hash, Eq, Clone)]
 enum Direction {
     U,
@@ -81,10 +79,7 @@ fn rek(matrix: &[Vec<u8>], cache: &mut HashSet<Beam>, beam: Beam, bounds: (usize
     }
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut matrix: Vec<Vec<u8>> = Vec::new();
 
     for line in input.lines() {
@@ -128,5 +123,5 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(DAY, &[solution_one, solution_two]);
+    aoc::print_solution(&[solution_one, solution_two]);
 }

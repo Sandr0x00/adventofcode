@@ -1,7 +1,5 @@
 use pathfinding::prelude::astar;
 
-const DAY: u8 = 17;
-
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy)]
 enum Direction {
     N, // none
@@ -65,10 +63,7 @@ fn options(v: &mut Vec<(Step, usize)>, matrix: &[Vec<u8>], bounds: (isize, isize
 
 const DEBUG: bool = false;
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut matrix: Vec<Vec<u8>> = Vec::new();
     for line in input.lines() {
         matrix.push(line.as_bytes().iter().map(|c| c - b'0').collect());
@@ -125,5 +120,5 @@ pub fn solve() {
         aoc::print_matrix(&matrix);
     }
 
-    aoc::print_solution(DAY, &[result_one.1, result_two.1]);
+    aoc::print_solution(&[result_one.1, result_two.1]);
 }

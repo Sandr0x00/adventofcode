@@ -4,8 +4,6 @@ use petgraph::Directed;
 use petgraph::graphmap::GraphMap;
 use petgraph_evcxr::draw_graph;
 
-const DAY: u8 = 20;
-
 const DEBUG: bool = false;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -91,10 +89,7 @@ fn button_press(modules: &mut HashMap<String, Module>) -> (bool, (usize, usize))
     (found, cnt)
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut input_map: HashMap<String, Vec<String>> = HashMap::new();
     let mut modules = HashMap::new();
 
@@ -163,5 +158,5 @@ pub fn solve() {
     // we count initial low pulse from broadcaster x4 => 3 times too much
     cnt.0 -= 3000;
 
-    aoc::print_solution(DAY, &[cnt.0 * cnt.1, aoc::lcm(&vals)]);
+    aoc::print_solution(&[cnt.0 * cnt.1, aoc::lcm(&vals)]);
 }

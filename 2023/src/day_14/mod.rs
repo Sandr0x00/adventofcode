@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 
-const DAY: u8 = 14;
-
 fn load(matrix: &mut [Vec<u8>], max: (usize, usize)) -> usize{
     let mut sum = 0;
     for (y, row) in matrix.iter().enumerate() {
@@ -95,7 +93,6 @@ fn tilt_east(matrix: &mut [Vec<u8>], max: (usize, usize)) {
     }
 }
 
-#[allow(dead_code)]
 fn pretty(matrix: &[Vec<u8>]) {
     println!();
     for row in matrix {
@@ -106,10 +103,7 @@ fn pretty(matrix: &[Vec<u8>]) {
     }
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut matrix: Vec<Vec<u8>> = Vec::new();
     let mut max = (0, 0);
 
@@ -153,5 +147,5 @@ pub fn solve() {
 
     let load_two = load(&mut matrix, max);
 
-    aoc::print_solution(DAY, &[load_one, load_two]);
+    aoc::print_solution(&[load_one, load_two]);
 }

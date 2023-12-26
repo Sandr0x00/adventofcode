@@ -1,7 +1,10 @@
+use std::process::Command;
+use std::io::{self, Write};
+use std::env;
 
-// mod day_01 Python
-// mod day_02 Python
-// mod day_03 Python
+// mod day_01; Python
+// mod day_02; Python
+// mod day_03; Python
 mod day_04;
 mod day_05;
 mod day_06;
@@ -22,34 +25,53 @@ mod day_20;
 mod day_21;
 // mod day_22;
 mod day_23;
-// mod day_24;
-// mod day_25;
+mod day_24;
+mod day_25;
 use std::time::Instant;
 
-fn main() {
+fn run(day: u8) {
+    println!("\nDay {day}");
+
+    let input = aoc::input(day);
+
     let start_time = Instant::now();
-    // 1 - 3 done in Python
-    // day_04::solve();
-    // day_05::solve();
-    // day_06::solve();
-    // day_07::solve();
-    // day_08::solve();
-    // day_09::solve();
-    // day_10::solve();
-    // day_11::solve();
-    // day_12::solve();
-    // day_13::solve();
-    // day_14::solve();
-    // day_15::solve();
-    // day_16::solve();
-    // day_17::solve();
-    // day_18::solve();
-    // 19 done in JS
-    // day_20::solve();
-    // day_21::solve();
-    // day_22::solve();
-    day_23::solve();
-    // day_24::solve();
-    // day_25::solve();
+    match day {
+         1 => unreachable!(),
+         2 => unreachable!(),
+         3 => unreachable!(),
+         4 => day_04::solve(input),
+         5 => day_05::solve(input),
+         6 => day_06::solve(input),
+         7 => day_07::solve(input),
+         8 => day_08::solve(input),
+         9 => day_09::solve(input),
+        10 => day_10::solve(input),
+        11 => day_11::solve(input),
+        12 => day_12::solve(input),
+        13 => day_13::solve(input),
+        14 => day_14::solve(input),
+        15 => day_15::solve(input),
+        16 => day_16::solve(input),
+        17 => day_17::solve(input),
+        18 => day_18::solve(input),
+        19 => {
+            let output = Command::new("node").arg("src/day_19/solve.js").output().unwrap();
+            io::stdout().write_all(&output.stdout).unwrap();
+        },
+        20 => day_20::solve(input),
+        21 => day_21::solve(input),
+        // 22 => day_22::solve(input: String),
+        23 => day_23::solve(input),
+        24 => day_24::solve(input),
+        25 => day_25::solve(input),
+        _ => unreachable!(),
+    }
     println!("Took {:?}", start_time.elapsed());
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    for a in args[1..].iter() {
+        run(a.parse::<u8>().unwrap());
+    }
 }

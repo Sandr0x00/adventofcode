@@ -1,7 +1,5 @@
 use itertools::Itertools;
 
-const DAY: u8 = 18;
-
 const NAIVE: bool = true;
 
 fn flood_fill(grid: &mut Vec<Vec<u8>>, x: usize, y: usize, count: &mut usize) {
@@ -37,10 +35,7 @@ fn calc(ins: Vec<(char, isize)>) -> isize{
     area
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut instructions = Vec::new();
     let mut instructions2 = Vec::new();
 
@@ -88,5 +83,5 @@ pub fn solve() {
         println!("Naive Solution for One {}", count);
     }
 
-    aoc::print_solution(DAY, &[calc(instructions), calc(instructions2)]);
+    aoc::print_solution(&[calc(instructions), calc(instructions2)]);
 }

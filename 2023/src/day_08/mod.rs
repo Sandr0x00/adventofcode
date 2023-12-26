@@ -1,7 +1,5 @@
 use std::collections::HashMap;
 
-const DAY: u8 = 8;
-
 fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &[char], start: &str, part_two: bool) -> usize {
     let mut i = 0;
     let mut next = start;
@@ -21,10 +19,7 @@ fn traverse(network: &HashMap<&str, (&str, &str)>, instructions: &[char], start:
     i
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let lines: Vec<_> = input.lines().collect();
     let instructions: Vec<_> = lines[0].chars().collect();
 
@@ -44,10 +39,9 @@ pub fn solve() {
     for start in starts {
         steps.push(traverse(&network, &instructions, start, true));
     }
-    let part_two = aoc::lcm(&steps);
 
-    aoc::print_solution(DAY, &[
+    aoc::print_solution(&[
         part_one,
-        part_two,
+        aoc::lcm(&steps),
     ])
 }

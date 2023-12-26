@@ -1,15 +1,10 @@
 
-const DAY: u8 = 4;
-
-#[allow(dead_code)]
-pub fn solve() {
-    let contents = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut sum: u32 = 0;
     // every card has 1 original
-    let mut winnings = vec![1; contents.lines().count()];
+    let mut winnings = vec![1; input.lines().count()];
 
-    for (i, line) in contents.lines().enumerate() {
+    for (i, line) in input.lines().enumerate() {
         let w_n: Vec<&str> = line[10..].split('|').collect();
         let winners: Vec<i32> = w_n[0].split(' ').filter_map(|w| w.parse::<i32>().ok()).collect();
         let numbers: Vec<i32> = w_n[1].split(' ').filter_map(|w| w.parse::<i32>().ok()).collect();
@@ -28,5 +23,8 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(DAY, &[sum, winnings.iter().sum::<u32>()])
+    aoc::print_solution(&[
+        sum,
+        winnings.iter().sum::<u32>()
+    ])
 }

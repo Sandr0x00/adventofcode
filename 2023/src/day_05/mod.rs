@@ -58,11 +58,7 @@ fn rek(seeds: &mut Vec<Seed>, s: usize, mapping: &[Mapping]) {
     }
 }
 
-const DAY: u8 = 5;
-
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
+pub fn solve(input: String) {
     let lines: Vec<_> = input.lines().collect();
 
     let seeds: Vec<_> = lines[0][7..].split(' ').filter_map(|w| w.parse::<u64>().ok()).collect();
@@ -146,7 +142,7 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(DAY, &[
+    aoc::print_solution(&[
         seeds_one.iter().map(|s| s.start).min().unwrap(),
         seeds_two.iter().map(|s| s.start).min().unwrap(),
     ])

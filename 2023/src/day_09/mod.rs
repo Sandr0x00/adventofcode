@@ -1,10 +1,5 @@
 
-const DAY: u8 = 9;
-
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut sum_one = 0;
     let mut sum_two = 0;
     for line in input.lines() {
@@ -27,5 +22,5 @@ pub fn solve() {
         sum_two += list_start.iter().sum::<isize>();
     }
 
-    aoc::print_solution(DAY, &[sum_one, sum_two]);
+    aoc::print_solution(&[sum_one, sum_two]);
 }

@@ -1,11 +1,8 @@
 
-const DAY: u8 = 13;
+
 const DEBUG: bool = false;
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let individual_patterns: Vec<_> = input.split("\n\n").collect();
 
     let mut sum_one = 0;
@@ -84,5 +81,5 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(DAY, &[sum_one, sum_two]);
+    aoc::print_solution(&[sum_one, sum_two]);
 }

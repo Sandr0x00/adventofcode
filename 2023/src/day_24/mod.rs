@@ -1,7 +1,5 @@
 use z3::*;
-use z3::ast::*;
-
-const DAY: u8 = 24;
+use z3::ast::{Ast,Int};
 
 #[derive(Debug, PartialEq, PartialOrd, Clone)]
 struct Hailstone {
@@ -12,10 +10,7 @@ struct Hailstone {
     m: f64,
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     // Z3
     let cfg = Config::new();
     let ctx = Context::new(&cfg);
@@ -105,5 +100,5 @@ pub fn solve() {
     let syv = model.eval(&sy, true).unwrap().as_i64().unwrap();
     let szv = model.eval(&sz, true).unwrap().as_i64().unwrap();
 
-    aoc::print_solution(DAY, &[count, sxv + syv + szv]);
+    aoc::print_solution(&[count, sxv + syv + szv]);
 }

@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-const DAY: u8 = 11;
-
 #[derive(Debug, Eq, PartialEq, Hash)]
 struct Pos {
     x: isize,
@@ -24,10 +22,7 @@ fn traverse(expanded_galaxies: &Vec<Pos>) -> isize {
     sum
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let rows: Vec<_> = input.lines().collect();
 
     let mut empty_cols: Vec<_> = (0..rows[0].len() as isize).collect();
@@ -72,5 +67,5 @@ pub fn solve() {
     let sum_one = traverse(&expanded_galaxies_one);
     let sum_two = traverse(&expanded_galaxies_two);
 
-    aoc::print_solution(DAY, &[sum_one, sum_two])
+    aoc::print_solution(&[sum_one, sum_two])
 }

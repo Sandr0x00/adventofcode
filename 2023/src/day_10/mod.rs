@@ -4,7 +4,6 @@ use petgraph::prelude::Undirected;
 // use petgraph_evcxr::draw_graph;
 use std::collections::HashSet;
 
-const DAY: u8 = 10;
 const SIZE: usize = 1000;
 
 fn get_xy(num: usize) -> (usize, usize) {
@@ -24,7 +23,6 @@ fn add(g: &mut GraphMap<usize, usize, Undirected>, max: (isize, isize), p1: (isi
 
     g.add_edge((p1.0 + p1.1 * SIZE as isize) as usize, (p2.0 + p2.1 * SIZE as isize) as usize, 0);
 }
-
 
 fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (GraphMap<usize, usize, Undirected>, HashSet<usize>, usize) {
     let mut dots = HashSet::new();
@@ -150,10 +148,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
     (graph, dots, start)
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let rows = input.lines().collect::<Vec<_>>();
     let max = (
         (rows.len() - 1) as isize,
@@ -220,5 +215,5 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(DAY, &[(dist / 4), inside]);
+    aoc::print_solution(&[(dist / 4), inside]);
 }

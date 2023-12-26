@@ -1,8 +1,6 @@
 use std::cmp::Ordering;
 use std::collections::HashMap;
 
-const DAY: u8 = 7;
-
 fn card_value(card: char, jokers: bool) -> u32 {
     if !jokers {
         match card {
@@ -167,10 +165,7 @@ impl PartialEq for Camel {
     }
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut hands_one = Vec::new();
     let mut hands_two = Vec::new();
     for line in input.lines() {
@@ -201,7 +196,7 @@ pub fn solve() {
         winnings_two += camel.bid * (i + 1);
     }
 
-    aoc::print_solution(DAY, &[
+    aoc::print_solution(&[
         winnings_one,
         winnings_two,
     ])

@@ -30,8 +30,7 @@ fn gcd_of_two_numbers(a: usize, b: usize) -> usize {
     gcd_of_two_numbers(b, a % b)
 }
 
-pub fn print_solution<T: std::fmt::Display>(day: u8, parts: &[T]) {
-    println!("\nDay {day}");
+pub fn print_solution<T: std::fmt::Display>(parts: &[T]) {
     print!("Part One ");
     if parts.is_empty() {
         println!("not yet solved");

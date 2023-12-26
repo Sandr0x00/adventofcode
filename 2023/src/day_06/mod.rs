@@ -20,12 +20,7 @@ fn ways_to_win(time: usize, record: usize) -> usize {
     max - min + 1
 }
 
-const DAY: u8 = 6;
-
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut res_one = 1;
     let data_one = &input
         .lines()
@@ -54,7 +49,7 @@ pub fn solve() {
         })
         .collect::<Vec<_>>();
 
-    aoc::print_solution(DAY, &[
+    aoc::print_solution(&[
         res_one,
         ways_to_win(data_two[0], data_two[1]),
     ])

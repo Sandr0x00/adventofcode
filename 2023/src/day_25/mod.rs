@@ -7,12 +7,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::process::Command;
 
-const DAY: u8 = 25;
-
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut graph = UnGraphMap::new();
 
     let mut nodes = HashSet::new();
@@ -41,8 +36,7 @@ pub fn solve() {
             file.write_all(format!("{:?}", Dot::with_config(&graph, &[])).as_bytes()).unwrap();
             Command::new("dot").arg("-Kneato").arg("-Tsvg").arg("graph.dot").arg("-ooutput.svg").spawn().unwrap();
 
-            aoc::print_solution(DAY, &["=> check output.svg"]);
-
+            aoc::print_solution(&["=> check output.svg"]);
         },
         2 => {
             let mut dfs = Dfs::new(&graph, "gzr");
@@ -52,7 +46,7 @@ pub fn solve() {
             }
             let cnt2 = nodes.len() - cnt1;
 
-            aoc::print_solution(DAY, &[cnt1 * cnt2]);
+            aoc::print_solution(&[cnt1 * cnt2]);
         },
         _ => unreachable!(),
     }

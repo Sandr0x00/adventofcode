@@ -4,8 +4,6 @@ use std::thread;
 use std::time::Instant;
 use std::str::from_utf8_unchecked;
 
-const DAY: u8 = 12;
-
 fn rek(re: &Regex, cur: &mut Vec<u8>, i: usize, count: &mut usize) {
     if i == cur.len() {
         // reached end
@@ -36,11 +34,7 @@ fn create_re(record: &str) -> String {
     format!(r"^[\.\?]*{}[\.\?]*$", record.split(',').map(|s| format!(r"[#\?]{{{s}}}")).collect::<Vec<_>>().join(r"[\.\?]+"))
 }
 
-#[allow(dead_code)]
-#[allow(unused_variables,unused_mut)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let start_time = Instant::now();
 
     let mut arrangements_one = 0;
@@ -76,7 +70,7 @@ pub fn solve() {
     // println!("{:?}", start_time.elapsed());
 
 
-    aoc::print_solution(DAY, &[arrangements_one, arrangements_two]);
+    aoc::print_solution(&[arrangements_one, arrangements_two]);
 }
 
 // def solve_puzzle(input_str, counts):

@@ -5,8 +5,6 @@ use petgraph::graphmap::GraphMap;
 use petgraph_evcxr::draw_graph;
 use pathfinding::prelude::astar;
 
-const DAY: u8 = 21;
-
 const DEBUG: bool = false;
 
 fn try_step(pos: (usize, usize), bounds: (usize, usize)) {
@@ -56,10 +54,7 @@ fn step2(matrix: &[Vec<u8>], positions: HashSet<(usize, usize)>, bounds: (usize,
     new_positions
 }
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
-
+pub fn solve(input: String) {
     let mut matrix: Vec<Vec<u8>> = Vec::new();
     let mut positions = HashSet::new();
 
@@ -88,5 +83,5 @@ pub fn solve() {
     println!("{:?}", positions.len());
 
 
-    aoc::print_solution(DAY, &[0]);
+    aoc::print_solution(&[0]);
 }

@@ -1,11 +1,8 @@
 use std::collections::HashMap;
 
-const DAY: u8 = 15;
 
-#[allow(dead_code)]
-pub fn solve() {
-    let input = aoc::input(DAY);
 
+pub fn solve(input: String) {
     let parts = input.split(',');
 
     let mut boxes = vec![HashMap::<Vec<u8>,(usize,u8)>::new(); 256];
@@ -67,5 +64,5 @@ pub fn solve() {
         }
     }
 
-    aoc::print_solution(DAY, &[sum_one, sum_two]);
+    aoc::print_solution(&[sum_one, sum_two]);
 }
