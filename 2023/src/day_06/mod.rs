@@ -22,32 +22,32 @@ fn ways_to_win(time: usize, record: usize) -> usize {
 
 pub fn solve(input: String) {
     let mut res_one = 1;
-    let data_one = &input
+    let data_one: Vec<Vec<usize>> = input
         .lines()
         .map(|l| {
             l[10..]
                 .split_ascii_whitespace()
-                .map(|w| w.parse::<usize>().unwrap())
-                .collect::<Vec<_>>()
+                .map(|w| w.parse().unwrap())
+                .collect()
         })
-        .collect::<Vec<_>>();
+        .collect();
 
     assert_eq!(data_one[0].len(), data_one[1].len());
     for i in 0..data_one[0].len() {
         res_one *= ways_to_win(data_one[0][i], data_one[1][i]);
     }
 
-    let data_two = input
+    let data_two: Vec<usize> = input
         .lines()
         .map(|l| {
             l[10..]
                 .chars()
                 .filter(|c| !c.is_whitespace())
                 .collect::<String>()
-                .parse::<usize>()
+                .parse()
                 .unwrap()
         })
-        .collect::<Vec<_>>();
+        .collect();
 
     aoc::print_solution(&[
         res_one,

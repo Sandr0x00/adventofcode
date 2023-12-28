@@ -5,9 +5,9 @@ pub fn solve(input: String) {
     let mut winnings = vec![1; input.lines().count()];
 
     for (i, line) in input.lines().enumerate() {
-        let w_n: Vec<&str> = line[10..].split('|').collect();
-        let winners: Vec<i32> = w_n[0].split(' ').filter_map(|w| w.parse::<i32>().ok()).collect();
-        let numbers: Vec<i32> = w_n[1].split(' ').filter_map(|w| w.parse::<i32>().ok()).collect();
+        let (w, n) = line[10..].split_once('|').unwrap();
+        let winners: Vec<i32> = w.split(' ').filter_map(|w| w.parse().ok()).collect();
+        let numbers: Vec<i32> = n.split(' ').filter_map(|w| w.parse().ok()).collect();
 
         let mut idx: isize = -1;
         for winner in winners {

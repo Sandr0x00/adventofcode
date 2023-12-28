@@ -111,7 +111,7 @@ pub fn solve(input: String) {
             continue
         }
 
-        let range: Vec<_> = line.split(' ').filter_map(|w| w.parse::<u64>().ok()).collect();
+        let range: Vec<u64> = line.split(' ').filter_map(|w| w.parse().ok()).collect();
 
         let mapping = Mapping {
             dest: range[0],
@@ -134,9 +134,6 @@ pub fn solve(input: String) {
         for s in 0..seeds_one.len() {
             rek(&mut seeds_one, s, mapping);
         }
-    }
-
-    for mapping in &mappings {
         for s in 0..seeds_two.len() {
             rek(&mut seeds_two, s, mapping);
         }

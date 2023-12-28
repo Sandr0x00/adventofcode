@@ -1,4 +1,5 @@
 import re
+import os
 from functools import reduce
 import operator
 
@@ -11,7 +12,7 @@ colors = bag.keys()
 
 one = 0
 two = 0
-with open("input.txt") as f:
+with open(os.path.dirname(__file__) + "/input.txt") as f:
     for line in f.read().splitlines():
         if len(line) == 0:
             continue

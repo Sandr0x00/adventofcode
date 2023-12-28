@@ -24,7 +24,7 @@ fn add(g: &mut GraphMap<usize, usize, Undirected>, max: (isize, isize), p1: (isi
     g.add_edge((p1.0 + p1.1 * SIZE as isize) as usize, (p2.0 + p2.1 * SIZE as isize) as usize, 0);
 }
 
-fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (GraphMap<usize, usize, Undirected>, HashSet<usize>, usize) {
+fn traverse(matrix: &[Vec<u8>], max: (isize, isize), final_dots: bool) -> (GraphMap<usize, usize, Undirected>, HashSet<usize>, usize) {
     let mut dots = HashSet::new();
 
     let mut start = 0;
@@ -40,31 +40,31 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                 let cur = (cur_x, cur_y);
                 dots.insert(cur_x as usize + cur_y as usize * SIZE);
                 match c {
-                    '|' => {
+                    b'|' => {
                         add(&mut graph, max, cur, (cur_x,     cur_y - 1));
                         add(&mut graph, max, cur, (cur_x,     cur_y + 1));
                     },
-                    '-' => {
+                    b'-' => {
                         add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
                         add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
                     },
-                    'L' => {
+                    b'L' => {
                         add(&mut graph, max, cur, (cur_x,     cur_y - 1));
                         add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
                     },
-                    'J' => {
+                    b'J' => {
                         add(&mut graph, max, cur, (cur_x,     cur_y - 1));
                         add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
                     },
-                    '7' => {
+                    b'7' => {
                         add(&mut graph, max, cur, (cur_x - 1, cur_y    ));
                         add(&mut graph, max, cur, (cur_x,     cur_y + 1));
                     },
-                    'F' => {
+                    b'F' => {
                         add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
                         add(&mut graph, max, cur, (cur_x,     cur_y + 1));
                     },
-                    'S' => {
+                    b'S' => {
                         // S is connected to all 4 sides
                         add(&mut graph, max, cur, (cur_x,     cur_y - 1));
                         add(&mut graph, max, cur, (cur_x,     cur_y + 1));
@@ -72,12 +72,12 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, cur, (cur_x + 1, cur_y    ));
                         start = cur_x as usize + cur_y as usize * SIZE;
                     },
-                    '.' => {},
+                    b'.' => {},
                     _ => {},
                 };
             } else {
                 match c {
-                    '|' => {
+                    b'|' => {
                         // X X
                         // X|X
                         // X X
@@ -86,7 +86,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, (cur_x + 1, cur_y - 1), (cur_x + 1, cur_y    ));
                         add(&mut graph, max, (cur_x + 1, cur_y    ), (cur_x + 1, cur_y + 1));
                     },
-                    '-' => {
+                    b'-' => {
                         // XXX
                         //  -
                         // XXX
@@ -95,7 +95,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, (cur_x - 1, cur_y + 1), (cur_x,     cur_y + 1));
                         add(&mut graph, max, (cur_x,     cur_y + 1), (cur_x + 1, cur_y + 1));
                     },
-                    'L' => {
+                    b'L' => {
                         // XL
                         add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x - 1, cur_y    ));
                         add(&mut graph, max, (cur_x - 1, cur_y    ), (cur_x - 1, cur_y + 1));
@@ -104,7 +104,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, (cur_x - 1, cur_y + 1), (cur_x,     cur_y + 1));
                         add(&mut graph, max, (cur_x,     cur_y + 1), (cur_x + 1, cur_y + 1));
                     },
-                    'J' => {
+                    b'J' => {
                         // JX
                         add(&mut graph, max, (cur_x + 1, cur_y - 1), (cur_x + 1, cur_y    ));
                         add(&mut graph, max, (cur_x + 1, cur_y    ), (cur_x + 1, cur_y + 1));
@@ -113,7 +113,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, (cur_x - 1, cur_y + 1), (cur_x,     cur_y + 1));
                         add(&mut graph, max, (cur_x,     cur_y + 1), (cur_x + 1, cur_y + 1));
                     },
-                    '7' => {
+                    b'7' => {
                         // 7X
                         add(&mut graph, max, (cur_x + 1, cur_y - 1), (cur_x + 1, cur_y    ));
                         add(&mut graph, max, (cur_x + 1, cur_y    ), (cur_x + 1, cur_y + 1));
@@ -122,7 +122,7 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x,     cur_y - 1));
                         add(&mut graph, max, (cur_x,     cur_y - 1), (cur_x + 1, cur_y - 1));
                     },
-                    'F' => {
+                    b'F' => {
                         //  X
                         //  F
                         add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x,     cur_y - 1));
@@ -131,8 +131,8 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
                         add(&mut graph, max, (cur_x - 1, cur_y - 1), (cur_x - 1, cur_y    ));
                         add(&mut graph, max, (cur_x - 1, cur_y    ), (cur_x - 1, cur_y + 1));
                     },
-                    'S' => {},
-                    '.' => {
+                    b'S' => {},
+                    b'.' => {
                         add(&mut graph, max, (cur_x,     cur_y    ), (cur_x,     cur_y - 1));
                         add(&mut graph, max, (cur_x,     cur_y    ), (cur_x,     cur_y + 1));
                         add(&mut graph, max, (cur_x,     cur_y    ), (cur_x - 1, cur_y    ));
@@ -149,17 +149,8 @@ fn traverse(matrix: &[Vec<char>], max: (isize, isize), final_dots: bool) -> (Gra
 }
 
 pub fn solve(input: String) {
-    let rows = input.lines().collect::<Vec<_>>();
-    let max = (
-        (rows.len() - 1) as isize,
-        (rows[0].len() - 1) as isize,
-    );
-
-
-    let mut matrix = Vec::new();
-    for line in rows.iter() {
-        matrix.push(line.chars().collect());
-    }
+    let mut matrix = aoc::parse_matrix(input);
+    let max = (matrix[0].len() as isize - 1, matrix.len() as isize - 1);
 
     let (graph, mut dots, start) = traverse(&matrix, max, false);
 
@@ -176,7 +167,7 @@ pub fn solve(input: String) {
     // update "real" dots
     for d in dots {
         let (x, y) = get_xy(d);
-        matrix[y][x] = '.';
+        matrix[y][x] = b'.';
     }
     let (non_graph, final_dots, _) = traverse(&matrix, max, true);
 

@@ -35,7 +35,7 @@ pub fn solve(input: String) {
     }
 
     let part_one = traverse(&network, &instructions, "AAA", false);
-    let mut steps = Vec::new();
+    let mut steps = Vec::with_capacity(starts.len());
     for start in starts {
         steps.push(traverse(&network, &instructions, start, true));
     }

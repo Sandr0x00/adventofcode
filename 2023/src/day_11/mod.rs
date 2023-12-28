@@ -67,5 +67,8 @@ pub fn solve(input: String) {
     let sum_one = traverse(&expanded_galaxies_one);
     let sum_two = traverse(&expanded_galaxies_two);
 
-    aoc::print_solution(&[sum_one, sum_two])
+    aoc::print_solution(&[
+        sum_one,
+        sum_two
+    ])
 }

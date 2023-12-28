@@ -81,5 +81,8 @@ pub fn solve(input: String) {
         }
     }
 
-    aoc::print_solution(&[sum_one, sum_two]);
+    aoc::print_solution(&[
+        sum_one,
+        sum_two
+    ]);
 }

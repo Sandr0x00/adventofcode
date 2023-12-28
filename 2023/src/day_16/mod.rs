@@ -80,11 +80,7 @@ fn rek(matrix: &[Vec<u8>], cache: &mut HashSet<Beam>, beam: Beam, bounds: (usize
 }
 
 pub fn solve(input: String) {
-    let mut matrix: Vec<Vec<u8>> = Vec::new();
-
-    for line in input.lines() {
-        matrix.push(line.as_bytes().to_vec());
-    }
+    let matrix = aoc::parse_matrix(input);
     let bounds = (matrix[0].len() - 1, matrix.len() - 1);
 
     let mut solution_two = 0;

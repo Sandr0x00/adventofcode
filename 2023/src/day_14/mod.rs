@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+const DEBUG: bool = false;
+
 fn load(matrix: &mut [Vec<u8>], max: (usize, usize)) -> usize{
     let mut sum = 0;
     for (y, row) in matrix.iter().enumerate() {
@@ -94,6 +96,9 @@ fn tilt_east(matrix: &mut [Vec<u8>], max: (usize, usize)) {
 }
 
 fn pretty(matrix: &[Vec<u8>]) {
+    if !DEBUG {
+        return;
+    }
     println!();
     for row in matrix {
         for c in row {
@@ -104,14 +109,8 @@ fn pretty(matrix: &[Vec<u8>]) {
 }
 
 pub fn solve(input: String) {
-    let mut matrix: Vec<Vec<u8>> = Vec::new();
-    let mut max = (0, 0);
-
-    for line in input.lines() {
-        max.0 = line.len();
-        matrix.push(line.as_bytes().to_vec());
-    }
-    max.1 = matrix.len();
+    let mut matrix = aoc::parse_matrix(input);
+    let max = (matrix[0].len(), matrix.len());
 
     let mut load_one = 0;
 
@@ -123,16 +122,16 @@ pub fn solve(input: String) {
         if cycle == 0 {
             load_one = load(&mut matrix, max);
         }
-        // pretty(&matrix);
+        pretty(&matrix);
 
         tilt_west(&mut matrix, max);
-        // pretty(&matrix);
+        pretty(&matrix);
 
         tilt_south(&mut matrix, max);
-        // pretty(&matrix);
+        pretty(&matrix);
 
         tilt_east(&mut matrix, max);
-        // pretty(&matrix);
+        pretty(&matrix);
 
         if let Some(last_seen) = memo.insert(matrix.clone(), cycle) {
             // fast forward (if possible)
@@ -145,7 +144,8 @@ pub fn solve(input: String) {
         cycle += 1;
     }
 
-    let load_two = load(&mut matrix, max);
-
-    aoc::print_solution(&[load_one, load_two]);
+    aoc::print_solution(&[
+        load_one,
+        load(&mut matrix, max)
+    ]);
 }

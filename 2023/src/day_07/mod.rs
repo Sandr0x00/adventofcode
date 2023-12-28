@@ -169,16 +169,16 @@ pub fn solve(input: String) {
     let mut hands_one = Vec::new();
     let mut hands_two = Vec::new();
     for line in input.lines() {
-        let parts: Vec<_> = line.split_ascii_whitespace().collect();
+        let (h, b) = line.split_once(' ').unwrap();
         let camel_one = Camel {
-            hand: parts[0].chars().collect(),
-            bid: parts[1].parse::<usize>().unwrap(),
+            hand: h.chars().collect(),
+            bid: b.parse::<usize>().unwrap(),
             jokers: false,
         };
         hands_one.push(camel_one);
         let camel_two = Camel {
-            hand: parts[0].chars().collect(),
-            bid: parts[1].parse::<usize>().unwrap(),
+            hand: h.chars().collect(),
+            bid: b.parse::<usize>().unwrap(),
             jokers: true,
         };
         hands_two.push(camel_two);
