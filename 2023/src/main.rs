@@ -24,7 +24,7 @@ mod day_18;
 mod day_20;
 // mod day_21;
 // mod day_22;
-// mod day_23;
+mod day_23;
 mod day_24;
 mod day_25;
 use std::time::Instant;
@@ -68,7 +68,7 @@ fn run(day: u8) {
         20 => day_20::solve(input),
         // 21 => day_21::solve(input),
         // 22 => day_22::solve(input: String),
-        // 23 => day_23::solve(input),
+        23 => day_23::solve(input),
         24 => day_24::solve(input),
         25 => day_25::solve(input),
         _ => unreachable!(),
