@@ -73,7 +73,6 @@ pub fn solve(input: String) {
             _ => unreachable!(),
         };
         instructions2.push((dir2, len2));
-
     }
 
     if NAIVE {
@@ -83,5 +82,8 @@ pub fn solve(input: String) {
         println!("Naive Solution for One {}", count);
     }
 
-    aoc::print_solution(&[calc(instructions), calc(instructions2)]);
+    aoc::print_solution(&[
+        calc(instructions),
+        calc(instructions2)
+    ]);
 }

@@ -122,8 +122,8 @@ def leaderboard(year):
         3559813: "SCS",
     }
 
-    print("               1111111111222222")
-    print("      1234567890123456789012345")
+    print("                1111111111222222")
+    print("       1234567890123456789012345")
 
     for board, name in boards.items():
         url = f"{URL}/{year}/leaderboard/private/view/{board}"
@@ -138,7 +138,7 @@ def leaderboard(year):
             row = row.decode_contents()
             if '<span class="privboard-position">' in row:
                 pos = re.search(r'\)</span>(?P<pos>[^<]+)<span', row).group(1)
-                row = re.sub(r'\)</span>(?P<pos>[^<]+)<span', f'.{pos:>4}<span', row)
+                row = re.sub(r'\)</span>(?P<pos>[^<]+)<span', f'.{pos:>5}<span', row)
             row = row.replace('</span>', '')
             row = re.sub(r'<span class="privboard-(name|position)">', '', row)
             row = row.replace('<span class="privboard-star-both">*', '\x1b[0;33m*\x1b[0m')

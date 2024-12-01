@@ -27,6 +27,10 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 24: Never Tell Me The Odds](2023/src/day_24)
 - <img src="res/lang-rust.svg" width="16" /> [Day 25: Snowverload](2023/src/day_25)
 
+## 2024
+
+- <img src="res/lang-rust.svg" width="16" /> [Day 1: Historian Hysteria](2024/src/day_01)
+
 ## 2022
 
 - <img src="res/lang-rust.svg" width="16" /> [Day 1: Calorie Counting](2022/src/day_01)

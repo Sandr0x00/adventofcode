@@ -1,4 +1,3 @@
-
 use std::fs;
 
 pub fn input(day: u8) -> String {
@@ -67,4 +66,3 @@ pub fn print_matrix(matrix: &[Vec<u8>]) {
         println!()
     }
 }
-
