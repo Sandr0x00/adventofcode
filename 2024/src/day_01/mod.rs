@@ -1,4 +1,4 @@
-pub fn solve(input: String) -> Vec<usize> {
+pub fn solve(input: String) -> Vec<u64> {
     let lines: Vec<_> = input.lines().collect();
 
     let mut left = Vec::new();
@@ -12,14 +12,14 @@ pub fn solve(input: String) -> Vec<usize> {
     left.sort_unstable();
     right.sort_unstable();
 
-    let mut diff: usize = 0;
+    let mut diff = 0;
     for i in 0..left.len() {
-        diff += (left[i] - right[i]).abs() as usize;
+        diff += (left[i] - right[i]).abs() as u64;
     }
 
     let mut similarity_score = 0;
     for l in left.iter() {
-        similarity_score += *l as usize * right.clone().into_iter().filter(|x| x == l).count();
+        similarity_score += *l as u64 * right.clone().into_iter().filter(|x| x == l).count() as u64;
     }
 
     vec![diff, similarity_score]

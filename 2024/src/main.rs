@@ -3,7 +3,7 @@ use std::io::{self, Write};
 use std::process::Command;
 
 mod day_01;
-// mod day_02; Python
+mod day_02;
 // mod day_03; Python
 // mod day_04;
 // mod day_05;
@@ -50,6 +50,7 @@ fn run(day: u8) {
     let start_time = Instant::now();
     let res = match day {
         1 => day_01::solve(input),
+        2 => day_02::solve(input),
         //  2 => run_non_rust(day, "python"),
         //  3 => run_non_rust(day, "python"),
         //  4 => day_04::solve(input),
