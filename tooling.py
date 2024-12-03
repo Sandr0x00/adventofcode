@@ -77,6 +77,7 @@ def build_readme():
 
     years = os.listdir()
     years = [y for y in years if len(y) == 4 and y.startswith("20")]
+    years.sort(reverse=True)
 
     for year in years:
         readme += f"""

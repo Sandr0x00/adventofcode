@@ -1,5 +1,11 @@
 # Advent of Code
 
+## 2024
+
+- <img src="res/lang-rust.svg" width="16" /> [Day 1: Historian Hysteria](2024/src/day_01)
+- <img src="res/lang-rust.svg" width="16" /> [Day 2: Red-Nosed Reports](2024/src/day_02)
+- <img src="res/lang-rust.svg" width="16" /> [Day 3: Mull It Over](2024/src/day_03)
+
 ## 2023
 
 - <img src="res/lang-python.svg" width="16" /> [Day 1: Trebuchet?!](2023/src/day_01)
@@ -26,10 +32,6 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 23: A Long Walk](2023/src/day_23)
 - <img src="res/lang-rust.svg" width="16" /> [Day 24: Never Tell Me The Odds](2023/src/day_24)
 - <img src="res/lang-rust.svg" width="16" /> [Day 25: Snowverload](2023/src/day_25)
-
-## 2024
-
-- <img src="res/lang-rust.svg" width="16" /> [Day 1: Historian Hysteria](2024/src/day_01)
 
 ## 2022
 
