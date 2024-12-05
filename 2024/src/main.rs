@@ -6,7 +6,7 @@ mod day_01;
 mod day_02;
 mod day_03;
 mod day_04;
-// mod day_05;
+mod day_05;
 // mod day_06;
 // mod day_07;
 // mod day_08;
@@ -29,6 +29,7 @@ mod day_04;
 // mod day_25;
 use std::time::Instant;
 
+#[allow(dead_code)]
 fn run_non_rust(day: u8, language: &str) {
     let file = format!(
         "src/day_{day:0>2}/solve.{}",
@@ -53,7 +54,7 @@ fn run(day: u8) {
         2 => day_02::solve(input),
         3 => day_03::solve(input),
         4 => day_04::solve(input),
-        //  5 => day_05::solve(input),
+        5 => day_05::solve(input),
         //  6 => day_06::solve(input),
         //  7 => day_07::solve(input),
         //  8 => day_08::solve(input),

@@ -140,6 +140,8 @@ def leaderboard(year):
             if '<span class="privboard-position">' in row:
                 pos = re.search(r'\)</span>(?P<pos>[^<]+)<span', row).group(1)
                 row = re.sub(r'\)</span>(?P<pos>[^<]+)<span', f'.{pos:>5}<span', row)
+            else:
+                row = " " + row
             row = row.replace('</span>', '')
             row = re.sub(r'<span class="privboard-(name|position)">', '', row)
             row = row.replace('<span class="privboard-star-both">*', '\x1b[0;33m*\x1b[0m')

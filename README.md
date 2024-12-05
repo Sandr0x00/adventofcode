@@ -6,6 +6,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 2: Red-Nosed Reports](2024/src/day_02)
 - <img src="res/lang-rust.svg" width="16" /> [Day 3: Mull It Over](2024/src/day_03)
 - <img src="res/lang-rust.svg" width="16" /> [Day 4: Ceres Search](2024/src/day_04)
+- <img src="res/lang-rust.svg" width="16" /> [Day 5: Print Queue](2024/src/day_05)
 
 ## 2023
 

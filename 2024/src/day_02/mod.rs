@@ -59,4 +59,6 @@ fn test() {
         ),
         vec![2, 4]
     );
+
+    assert_eq!(solve(aoc::input(2)), [442, 493]);
 }

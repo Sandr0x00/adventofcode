@@ -1,4 +1,3 @@
-use itertools::assert_equal;
 use regex::Regex;
 
 pub fn solve(input: String) -> Vec<u64> {
@@ -46,4 +45,6 @@ fn test() {
         )[1],
         48
     );
+
+    assert_eq!(solve(aoc::input(3)), [174103751, 100411201]);
 }

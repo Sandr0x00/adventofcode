@@ -164,10 +164,5 @@ MXMXAXMASX"
         [18, 9]
     );
 
-    // assert_eq!(
-    //     solve(
-    //         "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))".to_string()
-    //     )[1],
-    //     48
-    // );
+    assert_eq!(solve(aoc::input(4)), [2462, 1877]);
 }
