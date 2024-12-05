@@ -10,8 +10,6 @@ pub fn solve(input: String) -> Vec<u64> {
     let mut res_two = 0;
     let mut enabled = true;
     for cap in re.captures_iter(&input) {
-        println!("{:?}", cap);
-        println!("{:?}", cap.name("mul"));
         if cap.name("mul").is_some() {
             let first = cap["first"].parse::<i32>().unwrap();
             let second = cap["second"].parse::<i32>().unwrap();

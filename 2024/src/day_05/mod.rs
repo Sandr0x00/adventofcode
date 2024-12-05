@@ -1,22 +1,20 @@
 use std::cmp::Ordering;
 use std::collections::HashMap;
+use std::collections::HashSet;
 
 fn order_correct(rules: &HashMap<u64, Vec<u64>>, order: &[u64]) -> bool {
-    let mut allowed = rules.get(&order[0]).unwrap().clone();
+    let mut allowed = rules.get(&order[0]).map(|v| v.as_slice()).unwrap_or(&[]);
     for page in order[1..].iter() {
         if !allowed.contains(page) {
             return false;
         }
-        allowed = match rules.get(page) {
-            Some(vec) => vec.clone(),
-            None => Vec::<u64>::new(),
-        };
+        allowed = rules.get(page).map(|v| v.as_slice()).unwrap_or(&[]);
     }
 
     true
 }
 
-fn sort(a: &u64, b: &u64, rules: &[(u64, u64)]) -> Ordering {
+fn sort(a: &u64, b: &u64, rules: &HashSet<(u64, u64)>) -> Ordering {
     if rules.contains(&(*a, *b)) {
         Ordering::Less
     } else if rules.contains(&(*b, *a)) {
@@ -30,7 +28,7 @@ pub fn solve(input: String) -> Vec<u64> {
     let (rules_raw, pages) = input.split_once("\n\n").unwrap();
 
     let mut rules_map = HashMap::new();
-    let mut rules_list = Vec::<(u64, u64)>::new();
+    let mut rules_list = HashSet::new();
     for rule in rules_raw.lines() {
         let (first, second) = rule.split_once("|").unwrap();
         let first = first.parse::<u64>().unwrap();
@@ -38,7 +36,7 @@ pub fn solve(input: String) -> Vec<u64> {
 
         rules_map.entry(first).or_insert_with(Vec::<u64>::new);
         rules_map.get_mut(&first).unwrap().push(second);
-        rules_list.push((first, second))
+        rules_list.insert((first, second));
     }
 
     let mut part_one = 0;
