@@ -77,10 +77,10 @@ fn run(day: u8) {
         // 25 => day_25::solve(input),
         _ => unreachable!(),
     };
+    let took = start_time.elapsed();
 
     aoc::print_solution(&res);
-
-    println!("Took {:?}", start_time.elapsed());
+    println!("Took {took:?}");
 }
 
 fn main() {
