@@ -14,7 +14,7 @@ pub fn solve(input: String) -> Vec<u64> {
 
     let mut diff = 0;
     for i in 0..left.len() {
-        diff += (left[i] - right[i]).abs() as u64;
+        diff += (left[i] - right[i]).unsigned_abs();
     }
 
     let mut similarity_score = 0;
@@ -22,7 +22,7 @@ pub fn solve(input: String) -> Vec<u64> {
         similarity_score += *l as u64 * right.clone().into_iter().filter(|x| x == l).count() as u64;
     }
 
-    vec![diff, similarity_score]
+    vec![diff as u64, similarity_score]
 }
 
 #[test]

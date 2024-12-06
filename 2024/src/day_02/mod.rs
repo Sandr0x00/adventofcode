@@ -1,4 +1,4 @@
-fn is_safe(line: &Vec<i32>) -> bool {
+fn is_safe(line: &[i32]) -> bool {
     let inc = line[0] < line[line.len() - 1];
     let mut last = line[0];
 

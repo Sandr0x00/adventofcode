@@ -112,22 +112,20 @@ pub fn solve(input: String) -> Vec<u64> {
     let cache_len = cache.len();
     // Brute forcing takes a few seconds in release mode, but works well enough
     let mut loop_cnt: u64 = 0;
-    for y in 0..bounds.1 + 1 {
-        for x in 0..bounds.0 + 1 {
-            if start.x == x && start.y == y {
-                continue;
-            }
-            // no more dynamic resizing
-            let mut cache = HashSet::with_capacity(cache_len);
-            loop_cnt += next(
-                &matrix,
-                start.clone(),
-                &bounds,
-                &mut distinct_fields,
-                (x, y),
-                &mut cache,
-            );
+    for (x, y) in distinct_fields.clone().iter() {
+        if start.x == *x && start.y == *y {
+            continue;
         }
+        // no more dynamic resizing
+        let mut c = HashSet::with_capacity(cache_len);
+        loop_cnt += next(
+            &matrix,
+            start.clone(),
+            &bounds,
+            &mut distinct_fields,
+            (*x, *y),
+            &mut c,
+        );
     }
 
     vec![distinct_fields.len() as u64, loop_cnt]
