@@ -11,13 +11,14 @@ pub fn input(day: u8) -> String {
     fs::read_to_string(file).unwrap()
 }
 
-pub fn parse_matrix(input: String) -> Vec<Vec<u8>> {
+pub fn parse_matrix(input: String) -> (Vec<Vec<u8>>, (i32, i32)) {
     let mut matrix: Vec<Vec<u8>> = Vec::new();
     for line in input.lines() {
         matrix.push(line.as_bytes().to_vec());
     }
+    let bounds: (i32, i32) = (matrix[0].len() as i32 - 1, matrix.len() as i32 - 1);
 
-    matrix
+    (matrix, bounds)
 }
 
 pub fn lcm(nums: &[usize]) -> usize {

@@ -35,9 +35,7 @@ fn rek2(target: u64, status: u64, remaining_items: Vec<u64>) -> bool {
         remaining_items[1..].to_vec(),
     ) || rek2(
         target,
-        format!("{}{}", status, remaining_items[0])
-            .parse()
-            .unwrap(),
+        format!("{}{}", status, remaining_items[0]).parse().unwrap(),
         remaining_items[1..].to_vec(),
     )
 }

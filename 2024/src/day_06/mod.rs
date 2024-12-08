@@ -94,8 +94,7 @@ fn find_start(matrix: &[Vec<u8>], bounds: &(i32, i32)) -> Step {
 }
 
 pub fn solve(input: String) -> Vec<u64> {
-    let matrix = aoc::parse_matrix(input);
-    let bounds: (i32, i32) = (matrix[0].len() as i32 - 1, matrix.len() as i32 - 1);
+    let (matrix, bounds) = aoc::parse_matrix(input);
 
     let mut distinct_fields = HashSet::new();
 
@@ -115,16 +114,7 @@ pub fn solve(input: String) -> Vec<u64> {
         .par_iter()
         // Skip the start point
         .filter(|(x, y)| start.x != *x || start.y != *y)
-        .map(|(x, y)| {
-            next(
-                &matrix,
-                start.clone(),
-                &bounds,
-                &mut None,
-                (*x, *y),
-                cap,
-            )
-        })
+        .map(|(x, y)| next(&matrix, start.clone(), &bounds, &mut None, (*x, *y), cap))
         .sum();
 
     vec![distinct_fields.len() as u64, loop_cnt]

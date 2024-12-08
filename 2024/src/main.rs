@@ -9,7 +9,7 @@ mod day_04;
 mod day_05;
 mod day_06;
 mod day_07;
-// mod day_08;
+mod day_08;
 // mod day_09;
 // mod day_10;
 // mod day_11;
@@ -57,7 +57,7 @@ fn run(day: u8) {
         5 => day_05::solve(input),
         6 => day_06::solve(input),
         7 => day_07::solve(input),
-        //  8 => day_08::solve(input),
+        8 => day_08::solve(input),
         //  9 => day_09::solve(input),
         // 10 => day_10::solve(input),
         // 11 => day_11::solve(input),

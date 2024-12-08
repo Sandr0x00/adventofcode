@@ -14,8 +14,8 @@ enum Direction {
 fn rek(
     matrix: &Vec<Vec<u8>>,
     dir: Direction,
-    pos: (isize, isize),
-    bounds: (isize, isize),
+    pos: (i32, i32),
+    bounds: (i32, i32),
     off: usize,
 ) -> u64 {
     if off == 4 {
@@ -50,7 +50,7 @@ fn rek(
     0
 }
 
-fn check_pos(matrix: &[Vec<u8>], pos: (isize, isize), bounds: (isize, isize), char: u8) -> bool {
+fn check_pos(matrix: &[Vec<u8>], pos: (i32, i32), bounds: (i32, i32), char: u8) -> bool {
     if pos.0 < 0 || pos.1 < 0 {
         // we went OOB
         return false;
@@ -69,7 +69,7 @@ const M: u8 = 0x4d;
 const A: u8 = 0x41;
 const S: u8 = 0x53;
 
-fn part_two(matrix: &[Vec<u8>], pos: (isize, isize), bounds: (isize, isize)) -> u64 {
+fn part_two(matrix: &[Vec<u8>], pos: (i32, i32), bounds: (i32, i32)) -> u64 {
     // S S
     //  A
     // M M
@@ -118,8 +118,7 @@ fn part_two(matrix: &[Vec<u8>], pos: (isize, isize), bounds: (isize, isize)) -> 
 }
 
 pub fn solve(input: String) -> Vec<u64> {
-    let matrix = aoc::parse_matrix(input);
-    let bounds = (matrix[0].len() as isize - 1, matrix.len() as isize - 1);
+    let (matrix, bounds) = aoc::parse_matrix(input);
 
     let mut count = 0;
     let mut count2 = 0;

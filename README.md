@@ -9,6 +9,7 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 5: Print Queue](2024/src/day_05)
 - <img src="res/lang-rust.svg" width="16" /> [Day 6: Guard Gallivant](2024/src/day_06)
 - <img src="res/lang-rust.svg" width="16" /> [Day 7: Bridge Repair](2024/src/day_07)
+- <img src="res/lang-rust.svg" width="16" /> [Day 8: Resonant Collinearity](2024/src/day_08)
 
 ## 2023
 
