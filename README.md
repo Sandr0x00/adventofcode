@@ -10,6 +10,9 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 6: Guard Gallivant](2024/src/day_06)
 - <img src="res/lang-rust.svg" width="16" /> [Day 7: Bridge Repair](2024/src/day_07)
 - <img src="res/lang-rust.svg" width="16" /> [Day 8: Resonant Collinearity](2024/src/day_08)
+- <img src="res/lang-rust.svg" width="16" /> [Day 9: Disk Fragmenter](2024/src/day_09)
+- <img src="res/lang-rust.svg" width="16" /> [Day 10: Hoof It](2024/src/day_10)
+- <img src="res/lang-rust.svg" width="16" /> [Day 11: Plutonian Pebbles](2024/src/day_11)
 
 ## 2023
 
