@@ -1,14 +1,13 @@
+use once_cell::sync::Lazy;
 use regex::Regex;
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::Write;
-use once_cell::sync::Lazy;
 
 const BOUNDS: (i32, i32) = if cfg!(test) { (11, 7) } else { (101, 103) };
 
-static RE: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"p=(?P<x>\d+),(?P<y>\d+) v=(?P<vx>-?\d+),(?P<vy>-?\d+)").unwrap()
-});
+static RE: Lazy<Regex> =
+    Lazy::new(|| Regex::new(r"p=(?P<x>\d+),(?P<y>\d+) v=(?P<vx>-?\d+),(?P<vy>-?\d+)").unwrap());
 
 #[derive(Debug)]
 struct Robot {
@@ -80,7 +79,7 @@ fn draw_image(robots: &Vec<Robot>, steps: i32) {
     for row in map {
         for cell in row {
             if cell == 0 {
-                file.write_all(b".").unwrap();
+                file.write_all(b" ").unwrap();
             } else {
                 file.write_all(b"*").unwrap();
             }

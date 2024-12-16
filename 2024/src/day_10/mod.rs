@@ -6,9 +6,15 @@ use std::io::prelude::*;
 use std::process::Command;
 
 #[allow(unused_imports)]
-use petgraph::dot::{Dot, Config};
+use petgraph::dot::{Config, Dot};
 
-fn add(matrix: &[Vec<u8>], g: &mut GraphMap<(i32, i32), usize, Directed>, bounds: (i32, i32), p1: (i32, i32), p2: (i32, i32)) {
+fn add(
+    matrix: &[Vec<u8>],
+    g: &mut GraphMap<(i32, i32), usize, Directed>,
+    bounds: (i32, i32),
+    p1: (i32, i32),
+    p2: (i32, i32),
+) {
     if p1.0 < 0 || p1.1 < 0 || p1.0 > bounds.0 || p1.1 > bounds.1 {
         return;
     }
@@ -18,10 +24,10 @@ fn add(matrix: &[Vec<u8>], g: &mut GraphMap<(i32, i32), usize, Directed>, bounds
 
     // for debug fields
     if matrix[p1.1 as usize][p1.0 as usize] == b'.' {
-        return
+        return;
     }
     if matrix[p2.1 as usize][p2.0 as usize] == b'.' {
-        return
+        return;
     }
 
     // trail has to increase by exactly one
@@ -65,16 +71,16 @@ pub fn solve(input: String) -> Vec<u64> {
     let mut graph: GraphMap<_, _, Directed> = GraphMap::new();
     for y in 0..=bounds.1 {
         for x in 0..=bounds.0 {
-            add(&matrix, &mut graph, bounds, (x,y), (x,y - 1));
-            add(&matrix, &mut graph, bounds, (x,y), (x - 1,y));
-            add(&matrix, &mut graph, bounds, (x,y), (x,y + 1));
-            add(&matrix, &mut graph, bounds, (x,y), (x + 1,y));
+            add(&matrix, &mut graph, bounds, (x, y), (x, y - 1));
+            add(&matrix, &mut graph, bounds, (x, y), (x - 1, y));
+            add(&matrix, &mut graph, bounds, (x, y), (x, y + 1));
+            add(&matrix, &mut graph, bounds, (x, y), (x + 1, y));
 
             if matrix[y as usize][x as usize] == b'0' {
                 starts.push((x, y));
             }
             if matrix[y as usize][x as usize] == b'9' {
-                ends.push((x,y));
+                ends.push((x, y));
             }
         }
     }
@@ -82,9 +88,16 @@ pub fn solve(input: String) -> Vec<u64> {
     #[cfg(debug_assertions)]
     {
         let mut file = File::create("graph.dot").unwrap();
-        file.write_all(format!("{:?}", Dot::with_config(&graph, &[])).as_bytes()).unwrap();
+        file.write_all(format!("{:?}", Dot::with_config(&graph, &[])).as_bytes())
+            .unwrap();
         // println!("{:?}", Dot::with_config(&graph, &[Config::EdgeNoLabel]));
-        Command::new("dot").arg("-Kneato").arg("-Tsvg").arg("graph.dot").arg("-ooutput.svg").spawn().unwrap();
+        Command::new("dot")
+            .arg("-Kneato")
+            .arg("-Tsvg")
+            .arg("graph.dot")
+            .arg("-ooutput.svg")
+            .spawn()
+            .unwrap();
     }
 
     let mut part_one = 0;
@@ -103,54 +116,81 @@ pub fn solve(input: String) -> Vec<u64> {
         }
     }
 
-
-
     vec![part_one, part_two]
 }
 
 #[test]
 fn test() {
-    assert_eq!(solve("...0...
+    assert_eq!(
+        solve(
+            "...0...
 ...1...
 ...2...
 6543456
 7.....7
 8.....8
-9.....9".to_string())[0], 2);
+9.....9"
+                .to_string()
+        )[0],
+        2
+    );
 
-assert_eq!(solve("..90..9
+    assert_eq!(
+        solve(
+            "..90..9
 ...1.98
 ...2..7
 6543456
 765.987
 876....
-987....".to_string())[0], 4);
+987...."
+                .to_string()
+        )[0],
+        4
+    );
 
-assert_eq!(solve("10..9..
+    assert_eq!(
+        solve(
+            "10..9..
 2...8..
 3...7..
 4567654
 ...8..3
 ...9..2
-.....01".to_string())[0], 3);
+.....01"
+                .to_string()
+        )[0],
+        3
+    );
 
-assert_eq!(solve("89010123
+    assert_eq!(
+        solve(
+            "89010123
 78121874
 87430965
 96549874
 45678903
 32019012
 01329801
-10456732".to_string())[0], 36);
+10456732"
+                .to_string()
+        )[0],
+        36
+    );
 
-assert_eq!(solve(".....0.
+    assert_eq!(
+        solve(
+            ".....0.
 ..4321.
 ..5..2.
 ..6543.
 ..7..4.
 ..8765.
-..9....".to_string())[1], 3);
-
+..9...."
+                .to_string()
+        )[1],
+        3
+    );
 
     assert_eq!(solve(aoc::input(10))[0], 682);
 }

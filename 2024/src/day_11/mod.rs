@@ -1,5 +1,5 @@
-use std::iter::successors;
 use std::collections::HashMap;
+use std::iter::successors;
 
 fn len(n: u64) -> u32 {
     successors(Some(n), |&i| (i >= 10).then_some(i / 10)).count() as u32
@@ -13,7 +13,7 @@ pub fn solve(input: String) -> Vec<u64> {
     }
 
     let mut res_one = 0;
-    let mut res_two= 0;
+    let mut res_two = 0;
 
     for i in 0..75 {
         let mut new_stones: HashMap<u64, u64> = HashMap::new();
