@@ -13,9 +13,13 @@
 - <img src="res/lang-rust.svg" width="16" /> [Day 9: Disk Fragmenter](2024/src/day_09)
 - <img src="res/lang-rust.svg" width="16" /> [Day 10: Hoof It](2024/src/day_10)
 - <img src="res/lang-rust.svg" width="16" /> [Day 11: Plutonian Pebbles](2024/src/day_11)
+- <img src="res/lang-rust.svg" width="16" /> [Day 12: Garden Groups](2024/src/day_12)
 - <img src="res/lang-rust.svg" width="16" /> [Day 13: Claw Contraption](2024/src/day_13)
 - <img src="res/lang-rust.svg" width="16" /> [Day 14: Restroom Redoubt](2024/src/day_14)
+- <img src="res/lang-rust.svg" width="16" /> [Day 15: Warehouse Woes](2024/src/day_15)
 - <img src="res/lang-rust.svg" width="16" /> [Day 16: Reindeer Maze](2024/src/day_16)
+- <img src="res/lang-rust.svg" width="16" /> [Day 17: Chronospatial Computer](2024/src/day_17)
+- <img src="res/lang-rust.svg" width="16" /> [Day 18: RAM Run](2024/src/day_18)
 
 ## 2023
 
